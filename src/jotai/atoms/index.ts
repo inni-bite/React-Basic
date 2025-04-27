@@ -1,6 +1,5 @@
 import { atom } from 'jotai';
-import { atomFamily } from 'jotai/utils';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 // Constants
 const GRID_SIZE = 5;
@@ -9,7 +8,7 @@ const GRID_SIZE = 5;
 export interface Equipment {
   id: string;
   name: string;
-  icon: string | ReactNode;  // 아이콘 타입 확장
+  icon: string | ReactNode;
 }
 
 export interface GridCell {
@@ -28,20 +27,23 @@ const dummyEquipments: Equipment[] = [
 ];
 
 // Grid Generation
-const createInitialGrid = (): GridCell[][] => 
+const createInitialGrid = (): GridCell[][] =>
   Array.from({ length: GRID_SIZE }, (_, row) =>
     Array.from({ length: GRID_SIZE }, (_, col) => ({
       id: `${row}-${col}`,
-      equipmentId: null
+      equipmentId: null,
     }))
   );
 
 // Atoms
 export const equipmentsAtom = atom<Equipment[]>(dummyEquipments);
-export const selectedEquipmentAtom = atom<Equipment | null>(null);
-export const campGridAtom = atom<GridCell[][]>(createInitialGrid());
 
-// Atom Family for optimized grid cells
-export const cellAtomFamily = atomFamily((id: string) => 
-  atom<GridCell>({ id, equipmentId: null })
+// selectedEquipmentAtom 수정: get 매개변수 제거
+export const selectedEquipmentAtom = atom<Equipment | null, [Equipment | null], void>(
+  null, // 초기값
+  (_get, set, update) => {
+    set(selectedEquipmentAtom, update); // _get으로 변경하여 사용하지 않음을 명시
+  }
 );
+
+export const campGridAtom = atom<GridCell[][]>(createInitialGrid());

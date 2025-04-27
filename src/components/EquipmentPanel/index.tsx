@@ -1,16 +1,20 @@
-import { useAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { equipmentsAtom, selectedEquipmentAtom, type Equipment } from '@/jotai/atoms';
+import AddEquipment from '@/components/AddEquipment';
 
 const EquipmentPanel: React.FC = () => {
-  const [equipments] = useAtom(equipmentsAtom);
-  const [selectedEquipment, setSelectedEquipment] = useAtom(selectedEquipmentAtom);
+  const equipments = useAtomValue(equipmentsAtom);
+  const selectedEquipment = useAtomValue(selectedEquipmentAtom);
+  const setSelectedEquipment = useSetAtom(selectedEquipmentAtom);
 
+  // 스타일 정의
   const panelStyle: React.CSSProperties = {
     width: '280px',
     padding: '20px',
     backgroundColor: 'white',
     borderRight: '1px solid #E2E8F0',
-    height: '100%'
+    height: '100%',
+    overflowY: 'auto'
   };
 
   const titleStyle: React.CSSProperties = {
@@ -34,7 +38,7 @@ const EquipmentPanel: React.FC = () => {
     borderRadius: '4px',
     cursor: 'pointer',
     backgroundColor: isSelected ? '#EDF2F7' : 'transparent',
-    border: isSelected ? '2px solid #4299E1' : '1px solid #CBD5E0',
+    border: isSelected ? '2px solid #4ADE80' : '1px solid #CBD5E0',
     transition: 'all 0.2s'
   });
 
@@ -43,26 +47,42 @@ const EquipmentPanel: React.FC = () => {
     marginRight: '8px'
   };
 
-  const handleEquipmentSelect = (equipment: Equipment): void => {
-    // 타입 단언을 사용하여 함수 호출
-    (setSelectedEquipment as (value: Equipment) => void)(equipment);
+  const noEquipmentStyle: React.CSSProperties = {
+    padding: '16px',
+    textAlign: 'center',
+    color: '#718096',
+    backgroundColor: '#F7FAFC',
+    borderRadius: '4px',
+    margin: '16px 0'
+  };
+
+  const handleEquipmentSelect = (equipment: Equipment) => {
+    setSelectedEquipment(equipment);
   };
 
   return (
     <div style={panelStyle}>
       <h2 style={titleStyle}>캠핑 장비</h2>
-      <div style={equipmentListStyle}>
-        {equipments.map((equipment) => (
-          <div
-            key={equipment.id}
-            style={equipmentItemStyle(selectedEquipment?.id === equipment.id)}
-            onClick={() => handleEquipmentSelect(equipment)}
-          >
-            <span style={iconStyle}>{equipment.icon}</span>
-            {equipment.name}
-          </div>
-        ))}
-      </div>
+      <AddEquipment />
+      
+      {equipments.length === 0 ? (
+        <div style={noEquipmentStyle}>장비를 추가해주세요</div>
+      ) : (
+        <div style={equipmentListStyle}>
+          {equipments.map((equipment) => (
+            <div
+              key={equipment.id}
+              style={equipmentItemStyle(selectedEquipment?.id === equipment.id)}
+              onClick={() => handleEquipmentSelect(equipment)}
+              role="button"
+              tabIndex={0}
+            >
+              <span style={iconStyle}>{equipment.icon}</span>
+              {equipment.name}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

@@ -1,5 +1,23 @@
-// font-family: 'Noto Sans KR', sans-serif;
+// 기존 폰트
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
-// font-family: 'Public Sans', sans-serif;
 @import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+// 픽셀/레트로 폰트 추가
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+// 픽셀/레트로 폰트를 적용할 클래스
+.pixelated {
+  font-family: 'Press Start 2P', cursive;
+  letter-spacing: 1px;
+}
+
+// 기본 폰트 설정
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+// 제목 요소에 픽셀 폰트 적용
+h1, h2, h3 {
+  font-family: 'Press Start 2P', cursive;
+  letter-spacing: 1px;
+}
