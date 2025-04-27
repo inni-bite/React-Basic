@@ -44,7 +44,8 @@ const EquipmentPanel: React.FC = () => {
   };
 
   const handleEquipmentSelect = (equipment: Equipment): void => {
-    setSelectedEquipment(equipment);
+    // 타입 단언을 사용하여 함수 호출
+    (setSelectedEquipment as (value: Equipment) => void)(equipment);
   };
 
   return (

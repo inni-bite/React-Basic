@@ -1,4 +1,4 @@
-import { atom, SetStateAction } from 'jotai';
+import { atom } from 'jotai';
 
 // 타입 정의
 export interface Equipment {
@@ -11,6 +11,10 @@ export interface GridCell {
   id: string;
   equipmentId: string | null;
 }
+
+// SetStateAction 타입을 직접 정의
+export type SetStateAction<T> = T | ((prev: T) => T);
+export type SetSelectedEquipment = (update: SetStateAction<Equipment | null>) => void;
 
 // 더미 장비 데이터
 const dummyEquipments: Equipment[] = [
@@ -41,11 +45,10 @@ const createInitialGrid = (): GridCell[][] => {
 };
 
 // 장비 목록 상태
-export const equipmentsAtom = atom<Equipment[]>(dummyEquipments); // 배열 괄호 제거
+export const equipmentsAtom = atom<Equipment[]>(dummyEquipments);
 
 // 현재 선택된 장비 상태
 export const selectedEquipmentAtom = atom<Equipment | null>(null);
-export type SetSelectedEquipment = (update: SetStateAction<Equipment | null>) => void;
 
 // 캠프 그리드 상태
 export const campGridAtom = atom<GridCell[][]>(createInitialGrid());
