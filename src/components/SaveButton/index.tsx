@@ -1,9 +1,14 @@
 import React from 'react';
+import { useAtom } from 'jotai';
+import { campGridAtom } from '@/jotai/atoms';
 import html2canvas from 'html2canvas';
+import toast from 'react-simple-toasts';
 
 const SaveButton: React.FC = () => {
+  const [grid] = useAtom(campGridAtom);
+
   const buttonStyle: React.CSSProperties = {
-    backgroundColor: '#4299E1',
+    backgroundColor: '#4ADE80',
     color: 'white',
     padding: '12px 24px',
     borderRadius: '4px',
@@ -17,11 +22,25 @@ const SaveButton: React.FC = () => {
   };
 
   const handleSave = async () => {
+    // 장비가 하나라도 배치되어 있는지 확인
+    const hasEquipment = grid.some(row => row.some(cell => cell.equipmentId !== null));
+    
+    if (!hasEquipment) {
+      toast('장비를 하나 이상 배치해야 저장할 수 있습니다', {
+        position: 'top-center',
+        duration: 3000,
+      });
+      return;
+    }
+    
     try {
       const gridElement = document.getElementById('camp-grid');
       
       if (!gridElement) {
-        alert('캠프 그리드를 찾을 수 없습니다.');
+        toast('캠프 그리드를 찾을 수 없습니다', {
+          position: 'top-center',
+          duration: 2000,
+        });
         return;
       }
       
@@ -42,9 +61,17 @@ const SaveButton: React.FC = () => {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+      
+      toast('캠프가 성공적으로 저장되었습니다!', {
+        position: 'top-center',
+        duration: 3000,
+      });
     } catch (error) {
       console.error('이미지 저장 중 오류가 발생했습니다:', error);
-      alert('이미지 저장에 실패했습니다.');
+      toast('이미지 저장에 실패했습니다', {
+        position: 'top-center',
+        duration: 3000,
+      });
     }
   };
 
