@@ -1,0 +1,274 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 900;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.coffeeDetails {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  padding: 32px;
+  max-width: 700px;
+  width: 90%;
+  max-height: 85vh;
+  overflow-y: auto;
+  z-index: 1000;
+  animation: fadeIn 0.4s ease-out;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 32px;
+  line-height: 1;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.2s;
+  
+  &:hover {
+    color: #333;
+  }
+}
+
+.coffeeName {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #333;
+  line-height: 1.2;
+  word-break: keep-all;
+}
+
+.coffeeNameEnglish {
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  color: #888;
+}
+
+.originInfo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+  
+  span {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
+
+.origin {
+  background-color: #f0f4f8;
+  color: #4a6fa5;
+}
+
+.altitude {
+  background-color: #ebf7ed;
+  color: #38a169;
+}
+
+.process {
+  background-color: #fef5e7;
+  color: #dd6b20;
+}
+
+.roastLevel {
+  text-transform: capitalize;
+  
+  &.light {
+    background-color: #fcf3dc;
+    color: #b7791f;
+  }
+  
+  &.medium {
+    background-color: #efddc7;
+    color: #8b572a;
+  }
+  
+  &.mediumdark {
+    background-color: #e2cbb5;
+    color: #744210;
+  }
+  
+  &.dark {
+    background-color: #d6baa7;
+    color: #5c370a;
+  }
+}
+
+.description {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 28px;
+  word-break: keep-all;
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin-top: 32px;
+  margin-bottom: 16px;
+  position: relative;
+  padding-bottom: 8px;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background-color: #4a6fa5;
+    border-radius: 2px;
+  }
+  
+  &:first-of-type {
+    margin-top: 0;
+  }
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.tag {
+  padding: 8px 16px;
+  border-radius: 20px;
+  background-color: #f5f5f5;
+  color: #555;
+  font-size: 15px;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  &:hover {
+    background-color: #e8e8e8;
+  }
+  
+  &.brewingTag {
+    background-color: #e9f2ff;
+    color: #4a6fa5;
+    
+    &:hover {
+      background-color: #d9e8ff;
+    }
+  }
+}
+
+.tagEnglish {
+  font-size: 12px;
+  color: #999;
+  margin-top: 2px;
+}
+
+.ratings {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.ratingContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ratingLabel {
+  width: 60px;
+  font-size: 15px;
+  color: #666;
+  font-weight: 500;
+}
+
+.ratingBar {
+  flex-grow: 1;
+  height: 10px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+}
+
+.ratingFill {
+  height: 100%;
+  background-color: #4a6fa5;
+  border-radius: 5px;
+  transition: width 1s ease-out;
+}
+
+.ratingValue {
+  width: 30px;
+  text-align: right;
+  font-size: 15px;
+  color: #666;
+  font-weight: 500;
+}
+
+.recommendText {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #555;
+  background-color: #f9f9f9;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  word-break: keep-all;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .coffeeDetails {
+    padding: 24px;
+    width: 95%;
+    max-height: 90vh;
+  }
+  
+  .coffeeName {
+    font-size: 24px;
+  }
+  
+  .sectionTitle {
+    font-size: 18px;
+  }
+  
+  .tags {
+    gap: 8px;
+  }
+  
+  .tag {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+}

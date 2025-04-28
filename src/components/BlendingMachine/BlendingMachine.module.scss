@@ -1,0 +1,152 @@
+.blendingMachineContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+}
+
+.blendingMachine {
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s ease;
+  margin-bottom: 20px;
+  
+  &.hover {
+    transform: scale(1.02);
+  }
+  
+  &.processing {
+    pointer-events: none;
+  }
+}
+
+.machineSvg {
+  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+}
+
+.prompt {
+  text-align: center;
+  color: #5e3920;
+  font-weight: bold;
+  margin-top: 15px;
+  font-size: 1.1rem;
+  max-width: 300px;
+}
+
+.blendButton {
+  margin-top: 15px;
+  background-color: #8c6035;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  
+  &:hover {
+    background-color: #5e3920;
+  }
+  
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+}
+
+.secondaryButton {
+  margin-top: 10px;
+  background-color: transparent;
+  color: #8c6035;
+  border: 2px solid #8c6035;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  
+  &:hover {
+    background-color: #f7ede2;
+  }
+}
+
+// 애니메이션 관련 스타일
+@keyframes rotateGrinder {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes rotateGrinderReverse {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+.rotateGrinder {
+  animation: rotateGrinder 1s linear infinite;
+  transform-origin: center;
+}
+
+.rotateGrinderReverse {
+  animation: rotateGrinderReverse 1.2s linear infinite;
+  transform-origin: center;
+}
+
+// 콩 애니메이션
+@keyframes bean0 {
+  0% { transform: translate(0, 0); opacity: 1; }
+  100% { transform: translate(0, 25px); opacity: 0; }
+}
+
+@keyframes bean1 {
+  0% { transform: translate(0, 0); opacity: 1; }
+  100% { transform: translate(-10px, 25px); opacity: 0; }
+}
+
+@keyframes bean2 {
+  0% { transform: translate(0, 0); opacity: 1; }
+  100% { transform: translate(10px, 25px); opacity: 0; }
+}
+
+@keyframes bean3 {
+  0% { transform: translate(0, 0); opacity: 1; }
+  100% { transform: translate(-5px, 20px); opacity: 0; }
+}
+
+.coffeeBean {
+  transform-origin: center;
+  
+  &.bean0 { animation: bean0 1.5s ease-in infinite; }
+  &.bean1 { animation: bean1 1.2s ease-in infinite; }
+  &.bean2 { animation: bean2 1.4s ease-in infinite; }
+  &.bean3 { animation: bean3 1.3s ease-in infinite; }
+}
+
+// 블렌드 애니메이션
+@keyframes blendingPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.blendingPulse {
+  animation: blendingPulse 1s ease-in-out infinite;
+}
+
+// 가챠 효과 애니메이션
+@keyframes gatcha {
+  0% { transform: translateY(0); }
+  10% { transform: translateY(-5px); }
+  20% { transform: translateY(0); }
+  30% { transform: translateY(-5px); }
+  40% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+  60% { transform: translateY(0); }
+  100% { transform: translateY(0); }
+}
+
+.gatcha {
+  animation: gatcha 0.5s ease-in-out;
+}

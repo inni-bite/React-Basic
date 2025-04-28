@@ -1,0 +1,141 @@
+.coffeeMachineContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  perspective: 1200px;
+  padding: 2rem 0;
+}
+
+.coffeeMachine {
+  cursor: pointer;
+  transition: transform 0.4s ease;
+  transform-style: preserve-3d;
+  position: relative;
+  
+  &:hover, &.hover {
+    transform: scale(1.04) rotateY(4deg);
+  }
+  
+  &.grinding {
+    animation: shakeAnimation 0.1s ease-in-out infinite;
+  }
+}
+
+.machineSvg {
+  display: block;
+  margin: 0 auto;
+}
+
+.prompt {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  color: #333;
+  font-weight: 500;
+  font-family: 'Noto Sans KR', sans-serif;
+  transition: opacity 0.3s ease;
+  height: 1.8rem;
+}
+
+.rotateGrinder {
+  animation: rotate 1s linear infinite;
+  transform-origin: center;
+}
+
+.rotateGrinderReverse {
+  animation: rotateReverse 1.5s linear infinite;
+  transform-origin: center;
+}
+
+.coffeeBean {
+  opacity: 0;
+  
+  &.bean0 {
+    animation: fallBean 0.8s ease-in infinite;
+    animation-delay: 0.1s;
+  }
+  
+  &.bean1 {
+    animation: fallBean 0.7s ease-in infinite;
+    animation-delay: 0.2s;
+  }
+  
+  &.bean2 {
+    animation: fallBean 0.9s ease-in infinite;
+    animation-delay: 0.3s;
+  }
+  
+  &.bean3 {
+    animation: fallBean 0.75s ease-in infinite;
+    animation-delay: 0.15s;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotateReverse {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes shakeAnimation {
+  0% {
+    transform: translate(0, 0) rotateY(4deg);
+  }
+  25% {
+    transform: translate(-1px, 1px) rotateY(3deg);
+  }
+  50% {
+    transform: translate(0, -1px) rotateY(4deg);
+  }
+  75% {
+    transform: translate(1px, 1px) rotateY(5deg);
+  }
+  100% {
+    transform: translate(0, 0) rotateY(4deg);
+  }
+}
+
+@keyframes fallBean {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .coffeeMachine {
+    transform: scale(0.85);
+    
+    &:hover, &.hover {
+      transform: scale(0.9) rotateY(4deg);
+    }
+  }
+  
+  .prompt {
+    font-size: 1rem;
+  }
+}

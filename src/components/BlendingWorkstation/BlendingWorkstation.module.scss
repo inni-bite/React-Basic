@@ -1,0 +1,244 @@
+.blendingWorkstation {
+  position: relative;
+  background-color: #f8f4f0;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #432a2a;
+    font-size: 1.8rem;
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #666;
+  cursor: pointer;
+  
+  &:hover {
+    color: #333;
+  }
+}
+
+.beanSelectionArea {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.beanCard {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+  
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  &.selected {
+    border: 2px solid #8c6035;
+  }
+  
+  h4 {
+    margin: 0 0 8px;
+    color: #432a2a;
+  }
+  
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .roastLevel {
+    display: inline-block;
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    margin-top: 8px;
+    
+    &.light {
+      background-color: #e9d8c0;
+      color: #6b5035;
+    }
+    
+    &.medium {
+      background-color: #d3aa74;
+      color: #fff;
+    }
+    
+    &.mediumDark {
+      background-color: #a67c52;
+      color: #fff;
+    }
+    
+    &.dark {
+      background-color: #5e412f;
+      color: #fff;
+    }
+  }
+}
+
+.blendingArea {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.selectedBeansSection {
+  margin-bottom: 20px;
+  
+  h3 {
+    font-size: 1.2rem;
+    color: #432a2a;
+    margin-bottom: 10px;
+  }
+}
+
+.selectedBeansList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.selectedBeanItem {
+  display: flex;
+  align-items: center;
+  background-color: #f8f4f0;
+  border-radius: 6px;
+  padding: 8px 12px;
+  
+  .beanInfo {
+    flex: 1;
+    
+    h4 {
+      margin: 0;
+      font-size: 1rem;
+    }
+    
+    p {
+      margin: 3px 0 0;
+      font-size: 0.8rem;
+      color: #666;
+    }
+  }
+  
+  .ratioControl {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    button {
+      background-color: #e4d6c9;
+      border: none;
+      border-radius: 4px;
+      width: 25px;
+      height: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      
+      &:hover {
+        background-color: #d3aa74;
+        color: white;
+      }
+    }
+    
+    span {
+      width: 35px;
+      text-align: center;
+      font-weight: bold;
+    }
+  }
+  
+  .removeButton {
+    background: none;
+    border: none;
+    color: #8c6035;
+    cursor: pointer;
+    margin-left: 10px;
+    
+    &:hover {
+      color: #5e3920;
+    }
+  }
+}
+
+.createBlendSection {
+  margin-top: 25px;
+  text-align: center;
+  
+  button {
+    background-color: #8c6035;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    
+    &:hover {
+      background-color: #5e3920;
+    }
+    
+    &:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.noBeansSelected {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-style: italic;
+}
+
+.totalRatio {
+  text-align: right;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #666;
+  
+  &.error {
+    color: #e74c3c;
+    font-weight: bold;
+  }
+}
+
+// 애니메이션 관련 스타일
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.pulseAnimation {
+  animation: pulse 2s infinite;
+}

@@ -1,0 +1,98 @@
+.memoContainer {
+  margin: 2rem 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.paperBackground {
+  background-color: #fdfaf2;
+  border-radius: 2px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  position: relative;
+  max-width: 100%;
+  font-family: 'Noto Sans KR', sans-serif;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1.5rem;
+    background-color: #f7f2e3;
+    border-radius: 2px 2px 0 0;
+    z-index: 0;
+  }
+}
+
+.memoHeader {
+  position: relative;
+  height: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.paperClip {
+  position: absolute;
+  top: -0.5rem;
+  right: 1rem;
+  width: 1rem;
+  height: 2.5rem;
+  background-color: #9c9c9c;
+  border-radius: 0 0 2px 2px;
+  transform: rotate(10deg);
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0.2rem;
+    left: 0.25rem;
+    width: 0.5rem;
+    height: 2rem;
+    background-color: #d6d6d6;
+    border-radius: 0 0 2px 2px;
+  }
+}
+
+.noteLine {
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: #e8e0cf;
+}
+
+.memoContent {
+  position: relative;
+  z-index: 1;
+  line-height: 1.8;
+}
+
+.memoLine {
+  margin: 0 0 0.8rem 0;
+  font-size: 1rem;
+  color: #555;
+  word-break: keep-all;
+  text-align: justify;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .paperBackground {
+    padding: 1.25rem;
+  }
+  
+  .memoLine {
+    font-size: 0.9rem;
+  }
+}

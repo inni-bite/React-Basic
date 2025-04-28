@@ -1,0 +1,283 @@
+.blendResultModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.blendResultContent {
+  background-color: #f8f4f0;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.closeButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #666;
+  cursor: pointer;
+  
+  &:hover {
+    color: #333;
+  }
+}
+
+.header {
+  background-color: #8c6035;
+  color: white;
+  padding: 30px;
+  border-radius: 12px 12px 0 0;
+  text-align: center;
+  position: relative;
+  
+  h2 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+  p {
+    margin: 8px 0 0;
+    font-size: 1.1rem;
+    opacity: 0.9;
+  }
+}
+
+.blendInfo {
+  padding: 30px;
+  
+  h3 {
+    margin: 0 0 20px;
+    color: #5e3920;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #e4d6c9;
+    padding-bottom: 10px;
+  }
+}
+
+.tasteProfile {
+  margin-bottom: 30px;
+}
+
+.tasteVisualizer {
+  margin-top: 20px;
+}
+
+.flavorTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+  
+  .tag {
+    background-color: #e4d6c9;
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 0.9rem;
+    color: #5e3920;
+  }
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 30px;
+  
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.statItem {
+  .statLabel {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 5px;
+  }
+  
+  .statBar {
+    height: 10px;
+    background-color: #e4d6c9;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    
+    .statFill {
+      position: absolute;
+      height: 100%;
+      background-color: #8c6035;
+      border-radius: 5px;
+      left: 0;
+      top: 0;
+      transition: width 1s ease-out;
+    }
+  }
+  
+  .statValue {
+    font-size: 0.8rem;
+    color: #666;
+    text-align: right;
+    margin-top: 3px;
+  }
+}
+
+.componentsSection {
+  margin-top: 30px;
+  
+  h4 {
+    font-size: 1.2rem;
+    color: #5e3920;
+    margin-bottom: 15px;
+  }
+}
+
+.componentsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.componentItem {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 8px;
+  padding: 10px 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  
+  .beanInfo {
+    flex: 1;
+    
+    h5 {
+      margin: 0;
+      font-size: 1rem;
+      color: #5e3920;
+    }
+    
+    p {
+      margin: 3px 0 0;
+      font-size: 0.8rem;
+      color: #666;
+    }
+  }
+  
+  .ratio {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #8c6035;
+    min-width: 45px;
+    text-align: right;
+  }
+}
+
+.memoSection {
+  margin-top: 30px;
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #333;
+  position: relative;
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #e4d6c9;
+  
+  button {
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    
+    &.saveButton {
+      background-color: #8c6035;
+      color: white;
+      border: none;
+      
+      &:hover {
+        background-color: #5e3920;
+      }
+    }
+    
+    &.compareButton {
+      background-color: transparent;
+      color: #8c6035;
+      border: 2px solid #8c6035;
+      
+      &:hover {
+        background-color: #f7ede2;
+      }
+    }
+    
+    &.retryButton {
+      background-color: transparent;
+      color: #666;
+      border: 2px solid #ccc;
+      
+      &:hover {
+        background-color: #f0f0f0;
+        color: #333;
+        border-color: #999;
+      }
+    }
+  }
+}
+
+.tips {
+  margin-top: 30px;
+  background-color: #f2e8dd;
+  border-radius: 8px;
+  padding: 15px 20px;
+  
+  h4 {
+    margin: 0 0 10px;
+    font-size: 1rem;
+    color: #5e3920;
+  }
+  
+  ul {
+    margin: 0;
+    padding-left: 20px;
+    
+    li {
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      color: #666;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

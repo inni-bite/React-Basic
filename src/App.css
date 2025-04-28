@@ -1,0 +1,148 @@
+/* 탭 네비게이션 */
+.tab-navigation {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+}
+
+.tab-button {
+  background-color: transparent;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-color-light);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-button:hover {
+  background-color: rgba(139, 87, 42, 0.1);
+  color: var(--secondary-color);
+}
+
+.tab-button.active {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+/* 기본 스타일 */
+:root {
+  --primary-color: #4a6fa5;
+  --secondary-color: #8b572a;
+  --light-color: #f8f9fa;
+  --dark-color: #333;
+  --background-color: #f5f7fa;
+  --card-background: #ffffff;
+  --text-color: #333;
+  --text-color-light: #666;
+}
+
+/* 앱 컨테이너 */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* 헤더 스타일 */
+.app-header {
+  text-align: center;
+  padding: 2.5rem 1.5rem 1.5rem;
+}
+
+.app-header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+  letter-spacing: -0.03em;
+}
+
+.app-header p {
+  font-size: 1.125rem;
+  color: var(--text-color-light);
+  max-width: 600px;
+  margin: 0 auto;
+  letter-spacing: -0.01em;
+  word-break: keep-all;
+}
+
+/* 메인 콘텐츠 */
+.app-main {
+  flex: 1;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.machine-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  transition: all 0.5s ease;
+}
+
+.selector-container {
+  width: 100%;
+  max-width: 900px;
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* 푸터 스타일 */
+.app-footer {
+  padding: 1.25rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--text-color-light);
+  margin-top: auto;
+  border-top: 1px solid #eee;
+}
+
+/* 애니메이션 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 미디어 쿼리 */
+@media (max-width: 768px) {
+  .app-header h1 {
+    font-size: 2rem;
+  }
+  
+  .app-header p {
+    font-size: 1rem;
+  }
+  
+  .machine-container {
+    max-width: 90%;
+  }
+}
+
+/* 백드롭 (모달 배경) */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 900;
+  animation: fadeIn 0.3s ease-out;
+}
