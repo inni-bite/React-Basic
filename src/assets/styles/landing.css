@@ -1,0 +1,19 @@
+/* 랜딩 페이지 전용 전역 스타일 */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+body.landing-active {
+  background-color: #080808;
+}
+
+/* 전체 페이지 스타일링 오버라이드 */
+.app {
+  max-width: 100% !important;
+  width: 100%;
+}

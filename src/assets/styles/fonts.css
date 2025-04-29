@@ -1,0 +1,48 @@
+/* Univers Next Pro 폰트 설정 */
+@font-face {
+  font-family: 'Univers Next Pro';
+  src: url('/fonts/UniversNextProRegular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Univers Next Pro';
+  src: url('/fonts/UniversNextProItalic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Univers Next Pro';
+  src: url('/fonts/UniversNextProBold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Univers Next Pro';
+  src: url('/fonts/UniversNextProBoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Univers Next Pro';
+  src: url('/fonts/Univers Next Pro Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Univers Next Pro';
+  src: url('/fonts/Univers Next Pro Light Italic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}

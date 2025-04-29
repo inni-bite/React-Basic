@@ -1,3 +1,91 @@
+// 커피 병 리스트 스타일
+.coffeeBottlesList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+  justify-content: flex-start;
+}
+
+.coffeeBottleItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 150px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  animation: bottleFadeIn 0.5s ease-out forwards;
+  opacity: 0;
+  margin-bottom: 20px;
+  
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.bottleImageSmall {
+  width: 100px;
+  height: 150px;
+  position: relative;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.2));
+  }
+}
+
+.bottleLabelSmall {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 8px 10px;
+  width: 100%;
+  margin-top: -15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  z-index: 2;
+}
+
+.beanNameSmall {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.roastDot {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  bottom: 10px;
+  right: 10px;
+  border: 2px solid #fff;
+  
+  &.light {
+    background-color: #fcf3dc;
+  }
+  
+  &.medium {
+    background-color: #efddc7;
+  }
+  
+  &.mediumdark {
+    background-color: #e2cbb5;
+  }
+  
+  &.dark {
+    background-color: #d6baa7;
+  }
+}
+
 .coffeeSelectorContainer {
   width: 100%;
   max-width: 900px;
@@ -7,12 +95,18 @@
 }
 
 .title {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 700;
   margin-bottom: 24px;
   text-align: center;
   color: #333;
   font-family: 'Noto Sans KR', sans-serif;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 15px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .filterContainer {
@@ -20,6 +114,13 @@
   justify-content: center;
   gap: 12px;
   margin-bottom: 32px;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .filterButton {
@@ -39,43 +140,98 @@
   }
   
   &.active {
-    background-color: #4a6fa5;
+    background-color: #8b572a;
     color: #fff;
-    border-color: #4a6fa5;
+    border-color: #8b572a;
   }
 }
 
-.beansGrid {
+.beansBookshelf {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 30px;
+  padding: 30px;
+  background-color: #f5efdf;
+  border-radius: 8px;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05);
+  margin-top: 30px;
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: repeating-linear-gradient(90deg, #d0c4a6, #d0c4a6 15px, #e5dcc3 15px, #e5dcc3 30px);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: repeating-linear-gradient(90deg, #d0c4a6, #d0c4a6 15px, #e5dcc3 15px, #e5dcc3 30px);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
 }
 
-.beanCard {
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  padding: 24px;
+.beanBottle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   cursor: pointer;
-  transition: transform 0.25s, box-shadow 0.25s;
+  transition: transform 0.25s;
   position: relative;
-  overflow: hidden;
-  animation: cardFadeIn 0.8s ease-out forwards;
+  animation: bottleFadeIn 0.8s ease-out forwards;
   opacity: 0;
   
   &:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+    transform: translateY(-10px);
+    
+    .bottleLabel {
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
   }
 }
 
+.bottleImage {
+  width: 100%;
+  height: 250px;
+  margin-bottom: -35px;
+  z-index: 1;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+  }
+}
+
+.bottleLabel {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 15px;
+  width: 90%;
+  z-index: 2;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.25s;
+  text-align: center;
+}
+
 .roastIndicator {
-  position: absolute;
-  top: 18px;
-  right: 18px;
+  display: inline-block;
+  margin-bottom: 8px;
   padding: 5px 12px;
   border-radius: 12px;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
   text-transform: capitalize;
   font-family: 'Noto Sans KR', sans-serif;
@@ -102,18 +258,16 @@
 }
 
 .beanName {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   color: #333;
   font-family: 'Noto Sans KR', sans-serif;
-  padding-right: 72px; // 로스팅 레벨 표시 공간 확보
 }
 
 .beanOrigin {
-  font-size: 15px;
+  font-size: 14px;
   color: #666;
-  margin-bottom: 12px;
   font-family: 'Noto Sans KR', sans-serif;
 }
 
@@ -137,6 +291,7 @@
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   word-break: keep-all;
 }
@@ -152,7 +307,7 @@
   }
 }
 
-@keyframes cardFadeIn {
+@keyframes bottleFadeIn {
   from {
     opacity: 0;
     transform: translateY(30px);
