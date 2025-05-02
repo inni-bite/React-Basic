@@ -1,6 +1,5 @@
-import { useState } from 'react';
-import { useAtom } from 'jotai';
-import CoffeeMachine from './components/CoffeeMachine';
+import { useState, useEffect } from 'react';
+import { useAtom, useAtomValue } from 'jotai';
 import CoffeeSelector from './components/CoffeeSelector';
 import CoffeeDetails from './components/CoffeeDetails';
 import BlendingMachine from './components/BlendingMachine';
@@ -8,47 +7,46 @@ import BlendingWorkstation from './components/BlendingWorkstation';
 import BlendResult from './components/BlendResult';
 import BlendCompare from './components/BlendCompare';
 import LandingPage from './components/LandingPage/LandingPage';
-import { isGrindingSoundPlayingAtom, showCoffeeDetailsAtom, selectedCoffeeAtom } from './jotai/atoms/coffeeAtoms';
 import { 
   showBlendingWorkstationAtom, 
   showBlendResultAtom,
   blendAnimationStateAtom,
   showBlendCompareAtom
 } from './jotai/atoms/blendAtoms';
-import soundManager from './utilities/soundManager';
 import './App.css';
 
 function App() {
-  const [showSelector, setShowSelector] = useState(false);
-  const [, setIsGrindingSoundPlaying] = useAtom(isGrindingSoundPlayingAtom);
-  const [, setShowCoffeeDetails] = useAtom(showCoffeeDetailsAtom);
-  const [, setSelectedCoffee] = useAtom(selectedCoffeeAtom);
-  const [showBlendingWorkstation] = useAtom(showBlendingWorkstationAtom);
-  const [showBlendResult] = useAtom(showBlendResultAtom);
-  const [showBlendCompare] = useAtom(showBlendCompareAtom);
+  const showBlendingWorkstation = useAtomValue(showBlendingWorkstationAtom);
+  const showBlendResult = useAtomValue(showBlendResultAtom);
+  const showBlendCompare = useAtomValue(showBlendCompareAtom);
   const [, setBlendAnimationState] = useAtom(blendAnimationStateAtom);
   
   // 탭 선택 (-1: 랜딩 페이지, 0: 원두 탐색, 1: 블렌드 탐색, 2: 아카이브)
   const [activeTab, setActiveTab] = useState(-1);
   
-  // 원두 선택 시 그라인더 화면으로 전환
-  const handleSelectCoffee = (_coffeeId: string) => {
-    setShowSelector(true);
-  };
-
-  const handleGrind = () => {
-    // 그라인딩 사운드 재생
-    soundManager.playSound('grinding');
-    setIsGrindingSoundPlaying(true);
+  // 페이지 전환 시 스크롤 상단으로 이동
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [activeTab]);
+  
+  // 페이지 전환 시 body 클래스 관리
+  useEffect(() => {
+    document.body.className = ''; // 기존 클래스 제거
     
-    // 그라인딩 애니메이션 이후 커피 상세 정보 표시 (3초)
-    setTimeout(() => {
-      // 그라인딩 사운드 중지
-      soundManager.stopSound('grinding');
-      setIsGrindingSoundPlaying(false);
-      setShowCoffeeDetails(true);
-    }, 3000);
-  };
+    if (activeTab === -1) {
+      document.body.classList.add('landing-active');
+    } else if (activeTab === 0) {
+      document.body.classList.add('coffee-bean-active');
+    } else if (activeTab === 1) {
+      document.body.classList.add('blend-active');
+    } else if (activeTab === 2) {
+      document.body.classList.add('archive-active');
+    }
+    
+    return () => {
+      document.body.className = '';
+    };
+  }, [activeTab]);
   
   const handleBlend = () => {
     // 블렌딩 애니메이션 상태 변경
@@ -60,35 +58,46 @@ function App() {
     }, 3000);
   };
   
+  // 뒤로가기 핸들러
+  const handleGoBack = () => {
+    setActiveTab(-1); // 랜딩 페이지로 돌아가기
+  };
+  
   return (
-    <div className="app">
+    <div className={`app ${activeTab === 0 ? 'coffee-bean-view' : ''}`}>
       {activeTab === -1 ? (
         // 랜딩 페이지
         <LandingPage onSelectTab={setActiveTab} />
+      ) : activeTab === 0 ? (
+        // Coffee Bean 페이지 (피그마 디자인)
+        <CoffeeSelector onGoBack={handleGoBack} />
       ) : (
-        // 기능 페이지
+        // 기존 기능 페이지
         <>
           <header className="app-header">
             <h1 onClick={() => setActiveTab(-1)}>Coffee Explorer</h1>
             <p>세상의 모든 원두를 탐험하세요</p>
             
-            {/* 탭 네비게이션 */}
+            {/* 탭 네비게이션 - data-tab 속성 추가 */}
             <div className="tab-navigation">
               <button 
                 className={`tab-button ${activeTab === 0 ? 'active' : ''}`}
                 onClick={() => setActiveTab(0)}
+                data-tab="0"
               >
                 원두 탐색
               </button>
               <button 
                 className={`tab-button ${activeTab === 1 ? 'active' : ''}`}
                 onClick={() => setActiveTab(1)}
+                data-tab="1"
               >
                 나만의 블렌드
               </button>
               <button 
                 className={`tab-button ${activeTab === 2 ? 'active' : ''}`}
                 onClick={() => setActiveTab(2)}
+                data-tab="2"
               >
                 아카이브
               </button>
@@ -96,25 +105,7 @@ function App() {
           </header>
           
           <main className="app-main">
-            {activeTab === 0 ? (
-              // 원두 탐색 탭
-              <>
-                {!showSelector && (
-                  <div className="coffee-bottles-container">
-                    <CoffeeSelector onSelectCoffee={handleSelectCoffee} showAsList={true} />
-                  </div>
-                )}
-                
-                {showSelector && (
-                  <div className="machine-container">
-                    <CoffeeMachine onGrind={handleGrind} />
-                  </div>
-                )}
-                
-                {/* Coffee details modal (controlled by jotai state) */}
-                <CoffeeDetails />
-              </>
-            ) : activeTab === 1 ? (
+            {activeTab === 1 ? (
               // 블렌드 탭
               <>
                 <div className="machine-container">
@@ -126,12 +117,12 @@ function App() {
                 {showBlendResult && <BlendResult />}
                 {showBlendCompare && <BlendCompare />}
               </>
-            ) : (
+            ) : activeTab === 2 ? (
               // 아카이브 탭 (추후 구현)
               <div className="archive-container">
                 <h2>아카이브 기능은 현재 개발 중입니다.</h2>
               </div>
-            )}
+            ) : null}
           </main>
           
           <footer className="app-footer">
@@ -139,6 +130,9 @@ function App() {
           </footer>
         </>
       )}
+      
+      {/* Coffee details modal (controlled by jotai state) */}
+      <CoffeeDetails />
     </div>
   );
 }

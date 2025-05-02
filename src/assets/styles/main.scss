@@ -3,6 +3,11 @@
 @import './color.scss';
 @import './font.scss';
 
+/* 커스텀 마우스 포인터 설정 */
+* {
+  cursor: url('/mouse.png') 16 16, auto !important;
+}
+
 /* 기본 스타일 재설정 */
 * {
   margin: 0;

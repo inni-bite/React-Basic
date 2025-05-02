@@ -3,13 +3,13 @@ import './LandingPage.scss';
 
 // 로고 이미지 배열 정의
 const logoImages = [
-  "/logo C.png",
-  "/Logo O.png",
-  "/Logo F.png",
-  "/Logo F.png",
-  "/Logo E.png",
-  "/Logo E.png",
-  "/coffee-bean.png"
+  "/images/logos/logo-c.png",
+  "/images/logos/logo-o.png",
+  "/images/logos/logo-f.png",
+  "/images/logos/logo-f.png",
+  "/images/logos/logo-e.png",
+  "/images/logos/logo-e.png",
+  "/images/logos/coffee-bean.png"
 ];
 
 interface LandingPageProps {
@@ -43,7 +43,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onSelectTab }) => {
       {/* 로고 및 태그라인 */}
       <header className="landing-header">
         <div className="logo" onClick={() => onSelectTab(-1)}>
-          <h1>Coffee2</h1>
+          <h1>Coffe2</h1>
         </div>
         <div className="tagline">
           <p>A celebration of coffee and the moments that brew them.</p>

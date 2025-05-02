@@ -34,6 +34,23 @@
       letter-spacing: -0.04em;
       margin: 0;
       color: #ffffff;
+      position: relative;
+      display: inline-block;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background-color: #ffffff;
+        transition: width 0.3s ease;
+      }
+      
+      &:hover::after {
+        width: 100%;
+      }
     }
   }
 
@@ -125,9 +142,29 @@
     padding: 0;
     transition: color 0.2s ease;
     line-height: 1;
+    position: relative;
 
     &:hover {
       color: rgba(255, 255, 255, 0.7);
+      
+      &::after {
+        width: 100%;
+      }
+      
+      .arrow-icon {
+        transform: translateX(4px);
+      }
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: #ffffff;
+      transition: width 0.3s ease;
     }
 
     .arrow-icon {
@@ -137,6 +174,7 @@
       transform: none; /* 추가 회전 제거 */
       margin-left: 8px;
       margin-bottom: 2px; /* 텍스트와 정렬 조정 */
+      transition: transform 0.2s ease;
     }
   }
 }
