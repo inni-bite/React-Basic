@@ -1,4 +1,5 @@
 import { useAtom } from 'jotai';
+import { useState } from 'react';
 import { selectedCoffeeAtom, showCoffeeDetailsAtom, isLoadingModalAtom } from '../../jotai/atoms/coffeeAtoms';
 import { coffeeBeans } from '../../data/coffeeData';
 import CoffeeImage from '../CoffeeImage';
@@ -11,6 +12,8 @@ interface CoffeeSelectorProps {
   onGoBack?: () => void;
 }
 
+type NavTab = 'coffee' | 'blend' | 'archive';
+
 const CoffeeSelector: React.FC<CoffeeSelectorProps> = ({ 
   onSelectCoffee, 
   showAsList = false,
@@ -19,6 +22,7 @@ const CoffeeSelector: React.FC<CoffeeSelectorProps> = ({
   const [, setSelectedCoffee] = useAtom(selectedCoffeeAtom);
   const [, setShowCoffeeDetails] = useAtom(showCoffeeDetailsAtom);
   const [isLoadingModal, setIsLoadingModal] = useAtom(isLoadingModalAtom);
+  const [localTab, setLocalTab] = useState<NavTab>('coffee');
 
   const handleCoffeeSelect = async (coffeeId: string) => {
     const selected = coffeeBeans.find(bean => bean.id === coffeeId);
@@ -43,6 +47,24 @@ const CoffeeSelector: React.FC<CoffeeSelectorProps> = ({
   const handleGoBack = () => {
     if (onGoBack) {
       onGoBack();
+    }
+  };
+
+  const handleTabClick = (tab: NavTab) => {
+    setLocalTab(tab);
+    
+    if (tab === 'blend' && onGoBack) {
+      onGoBack();
+      setTimeout(() => {
+        const blendButton = document.querySelector('[data-tab="1"]') as HTMLElement;
+        if (blendButton) blendButton.click();
+      }, 100);
+    } else if (tab === 'archive' && onGoBack) {
+      onGoBack();
+      setTimeout(() => {
+        const archiveButton = document.querySelector('[data-tab="2"]') as HTMLElement;
+        if (archiveButton) archiveButton.click();
+      }, 100);
     }
   };
   
@@ -105,6 +127,47 @@ const CoffeeSelector: React.FC<CoffeeSelectorProps> = ({
               </div>
             ))}
           </div>
+          
+          <footer className={styles.navigationFooter}>
+            <button 
+              className={`${styles.navButton} ${localTab === 'coffee' ? styles.active : ''}`}
+              onClick={() => handleTabClick('coffee')}
+            >
+              Coffee Bean
+              <div className={styles.arrowIcon}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 19L19 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  <path d="M19 14V5H10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+            </button>
+            
+            <button 
+              className={`${styles.navButton} ${localTab === 'blend' ? styles.active : ''}`}
+              onClick={() => handleTabClick('blend')}
+            >
+              Blend
+              <div className={styles.arrowIcon}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 19L19 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  <path d="M19 14V5H10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+            </button>
+            
+            <button 
+              className={`${styles.navButton} ${localTab === 'archive' ? styles.active : ''}`}
+              onClick={() => handleTabClick('archive')}
+            >
+              Archive
+              <div className={styles.arrowIcon}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 19L19 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  <path d="M19 14V5H10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+            </button>
+          </footer>
         </>
       ) : (
         <div className={styles.coffeeBottlesList}>

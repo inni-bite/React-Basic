@@ -245,9 +245,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid #eee;
   z-index: 999; // 더 높은 z-index로 추가
-  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1); // 그림자 효과
 }
 
 .navButton {

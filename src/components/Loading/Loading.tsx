@@ -58,9 +58,11 @@ const Loading: React.FC<LoadingProps> = ({ isVisible }) => {
   return (
     <div className={styles.loadingWrapper}>
       <div className={styles.loadingContent}>
-        <img 
-          src="/images/loading/loading.jpg"
-          alt="Loading..." 
+        <video 
+          src="/images/loading/loading.mp4"
+          autoPlay
+          muted
+          playsInline
           className={styles.loadingImage}
         />
       </div>
