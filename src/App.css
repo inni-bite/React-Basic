@@ -2,6 +2,7 @@
 * {
   margin: 0;
   padding: 0;
+  widht: 100%;
   box-sizing: border-box;
 }
 
@@ -15,14 +16,20 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.5;
-  overflow-x: hidden; /* 가로 스크롤만 방지 */
-  -webkit-overflow-scrolling: touch; /* 모바일 스크롤 개선 */
+  overflow-x: hidden;
+  overflow-y: auto !important; /* 강제 적용 */
+  -webkit-overflow-scrolling: touch;
+  min-height: 100vh;
 }
 
-html {
+html, body, #root {
   margin: 0;
   padding: 0;
-  /* height 제한 제거 */
+  width: 100%;
+  height: 100%;
+  oveflow-y: auto; /* 세로 스크롤 허용 */
+  box-sizing: border-box;
+  scroll-behavior: smooth; /* 부드러운 스크롤 효과 */
 }
 
 /* 랜딩 페이지 활성화 시 스타일 (다크 테마) */
@@ -30,13 +37,14 @@ body.landing-active {
   background-color: #080808;
   color: #FFFFFF;
   cursor: url('/images/ui/mouse.png'), auto;
+  overflow: hidden;
 }
 
 /* 커피 빈 페이지 활성화 시 스타일 */
 body.coffee-bean-active {
   background-color: #FFFFFF;
   color: #000000;
-  overflow-y: auto; /* 커피 빈 페이지에서 스크롤 허용 */
+  overflow-y: auto !important;
 }
 
 /* 커스텀 스크롤바 */
@@ -72,7 +80,6 @@ body.landing-active::-webkit-scrollbar-thumb {
   display: flex;
   flex-direction: column;
   position: relative;
-  /* 속성 제거: min-height, height */
 }
 
 /* 페이지 전환 애니메이션 */
@@ -90,7 +97,6 @@ body.landing-active::-webkit-scrollbar-thumb {
 /* Coffee Bean 뷰 스타일 */
 .coffee-bean-view {
   background-color: #FFFFFF;
-  /* height 및 overflow 속성 제거 */
 }
 
 /* 탭 네비게이션 */
@@ -209,6 +215,7 @@ body.landing-active::-webkit-scrollbar-thumb {
   align-items: center;
   gap: 2.5rem;
   background-color: #FFFFFF;
+  min-height: calc(100vh - 200px); /* 최소 높이 설정 */
 }
 
 .machine-container {
@@ -260,7 +267,7 @@ body.landing-active::-webkit-scrollbar-thumb {
     max-width: 90%;
   }
   
-  /* 모바일에서 고정 요소를 위한 패딩 */
+  /* 모바일에서 하단 패딩 */
   .app {
     padding-bottom: 100px;
   }
@@ -288,8 +295,6 @@ body.landing-active::-webkit-scrollbar-thumb {
     font-size: 0.9rem;
     padding: 0.6rem 1.2rem;
   }
-  
-  /* 모바일에서 스크롤 문제 해결을 위한 추가 스타일 - 삭제 */
 }
 
 /* 랜딩 페이지는 다크 테마 유지 */

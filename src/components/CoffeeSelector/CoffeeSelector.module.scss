@@ -88,17 +88,12 @@
 
 // 피그마 디자인에 맞는 새로운 Coffee Bean 페이지 스타일
 .coffeeBeanPage {
-  background-color: #FFFFFF; 
-  color: #000000; 
-  // 모든 고정 높이 제거
-  // 모든 overflow 속성 제거
-  font-family: 'Univers Next Pro', 'Noto Sans KR', sans-serif;
-  padding: 0 48px;
-  box-sizing: border-box;
+  background-color: #FFFFFF;
+  min-height: 100vh;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 100px; // 하단 네비게이션 공간 확보
+  position: relative;
+  padding: 0 48px 120px 48px;
+  overflow-y: auto; /* 스크롤 허용 */
 }
 
 // 헤더 스타일 (피그마 디자인에 맞춤) - 클릭 가능한 느낌의 로고
@@ -168,8 +163,8 @@
   flex-direction: column;
   gap: 80px; 
   padding: 40px 0;
-  // flex: 1 제거 - 마크업의 자연스러운 플로우 유지
-  // 모든 margin, overflow 제거
+  width: 100%;
+  margin-bottom: 160px;
 }
 
 // 커피 행 스타일
@@ -198,7 +193,6 @@
     width: 100%;
     aspect-ratio: 1/1;
     margin-bottom: 12px;
-    overflow: hidden; // 이미지 확대 시 넘치는 부분 숨김
     border-radius: 2px; // 약간의 라운드 처리
     position: relative;
     
@@ -253,7 +247,7 @@
   align-items: center;
   border-top: 1px solid #eee;
   z-index: 999; // 더 높은 z-index로 추가
-  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1); // 그림자 메크로
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1); // 그림자 효과
 }
 
 .navButton {
@@ -348,7 +342,7 @@
   }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 768px) {
   .coffeeBeanPage {
     padding: 0 24px;
   }
@@ -376,24 +370,30 @@
   }
   
   .navigationFooter {
-    flex-direction: column;
-    gap: 24px;
-    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 16px;
+  }
+  
+  .coffeeBeanPage {
+    padding: 0 16px;
+    padding-bottom: 180px; // 모바일에서 네비게이션 높이 더 추가 확보
   }
 }
 
 @media (max-width: 576px) {
   .coffeeBeanPage {
-    padding: 0 16px;
-    padding-bottom: 200px; // 모바일에서 네비게이션 높이 고려하여 더 넘은 여백
+    padding: 0 12px;
+    padding-bottom: 200px; // 작은 모바일 화면에서 더 넓은 여백
   }
 
   .navigationFooter {
-    padding: 16px;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
   }
   
   .coffeeCard {
-    width: 100%;
+    width: 100%; // 작은 화면에서는 전체 너비 사용
   }
   
   .coffeeBeanContent {

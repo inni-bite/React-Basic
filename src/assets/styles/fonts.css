@@ -25,6 +25,14 @@
 
 @font-face {
   font-family: 'Univers Next Pro';
+  src: url('/fonts/UniversNextProBold.ttf') format('truetype');
+  font-weight: 750; /* 피그마 디자인에 맞춘 가중치 */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Univers Next Pro';
   src: url('/fonts/UniversNextProBoldItalic.ttf') format('truetype');
   font-weight: 700;
   font-style: italic;
@@ -44,5 +52,22 @@
   src: url('/fonts/Univers Next Pro Light Italic.ttf') format('truetype');
   font-weight: 300;
   font-style: italic;
+  font-display: swap;
+}
+
+/* 피그마 디자인에 필요한 추가 가중치 설정 */
+@font-face {
+  font-family: 'Univers Next Pro';
+  src: url('/fonts/UniversNextProRegular.ttf') format('truetype');
+  font-weight: 500; /* Medium */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Univers Next Pro';
+  src: url('/fonts/UniversNextProBold.ttf') format('truetype');
+  font-weight: 600; /* Semibold */
+  font-style: normal;
   font-display: swap;
 }

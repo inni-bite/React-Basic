@@ -30,23 +30,15 @@ function App() {
   }, [activeTab]);
   
   // 페이지 전환 시 body 클래스 관리
-  useEffect(() => {
-    document.body.className = ''; // 기존 클래스 제거
-    
-    if (activeTab === -1) {
-      document.body.classList.add('landing-active');
-    } else if (activeTab === 0) {
-      document.body.classList.add('coffee-bean-active');
-    } else if (activeTab === 1) {
-      document.body.classList.add('blend-active');
-    } else if (activeTab === 2) {
-      document.body.classList.add('archive-active');
-    }
-    
-    return () => {
-      document.body.className = '';
-    };
-  }, [activeTab]);
+useEffect(() => {
+  document.body.classList.remove('landing-active', 'coffee-bean-active');
+  
+  if (activeTab === -1) {
+    document.body.classList.add('landing-active');
+  } else if (activeTab === 0) {
+    document.body.classList.add('coffee-bean-active');
+  }
+}, [activeTab]);
   
   const handleBlend = () => {
     // 블렌딩 애니메이션 상태 변경
