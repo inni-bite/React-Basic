@@ -1,152 +1,251 @@
 .blendingMachineContainer {
+  background-color: #FFFFFF;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  padding-bottom: 60px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.coffeeBeanHeader {
+  display: flex;
+  align-items: center;
+  padding: 16px 48px;
+  width: 100%;
+  position: relative;
+  background-color: #FFFFFF;
+  z-index: 100;
+  justify-content: space-between;
+  border-bottom: 1px solid #EFEFEF;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.clickableLogo {
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  margin: 0;
+  color: #080808;
+  font-family: 'Univers Next Pro', sans-serif;
+  position: relative;
+  display: inline-block;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: #080808;
+    transition: width 0.3s;
+  }
+  
+  &:hover::after {
+    width: 100%;
+  }
+}
+
+.mainContent {
+  flex: 1;
+  display: flex;
+  margin-top: 20px;
+  padding: 0 48px;
+  max-width: 1344px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+.leftSection {
+  width: 672px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-  position: relative;
+  justify-content: center;
+}
+
+.rightSection {
+  width: 646px;
+  padding-left: 24px;
+}
+
+.blendSection {
+  width: 530px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
 }
 
 .blendingMachine {
   cursor: pointer;
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition: transform 0.3s ease;
-  margin-bottom: 20px;
   
-  &.hover {
+  &:hover {
     transform: scale(1.02);
   }
-  
-  &.processing {
-    pointer-events: none;
-  }
 }
 
-.machineSvg {
-  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+.coffeeMachineImage {
+  width: 100%;
+  max-width: 530px;
+  height: auto;
+  object-fit: contain;
 }
 
-.prompt {
-  text-align: center;
-  color: #5e3920;
-  font-weight: bold;
-  margin-top: 15px;
-  font-size: 1.1rem;
-  max-width: 300px;
-}
-
-.blendButton {
-  margin-top: 15px;
-  background-color: #8c6035;
-  color: white;
+.createCoffeeButton {
+  background-color: #B09EFF;
+  color: #080808;
   border: none;
-  border-radius: 6px;
-  padding: 12px 24px;
-  font-size: 1rem;
-  font-weight: bold;
+  border-radius: 16px;
+  padding: 16px;
+  font-size: 24px;
+  font-family: 'Univers Next Pro', sans-serif;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  letter-spacing: -0.04em;
   
   &:hover {
-    background-color: #5e3920;
-  }
-  
-  &:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+    opacity: 0.9;
   }
 }
 
-.secondaryButton {
-  margin-top: 10px;
-  background-color: transparent;
-  color: #8c6035;
-  border: 2px solid #8c6035;
-  border-radius: 6px;
-  padding: 10px 20px;
-  font-size: 0.9rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.2s;
+.navigationFooter {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #FFFFFF;
+  padding: 16px 48px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 999;
+}
+
+.navButton {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  color: #080808;
+  font-family: 'Univers Next Pro', sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  padding: 0;
+  line-height: 1;
+  position: relative;
   
-  &:hover {
-    background-color: #f7ede2;
+  &:focus,
+  &:active {
+    outline: none;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: #080808;
+    transition: width 0.3s;
+  }
+  
+  &:hover::after {
+    width: 100%;
+  }
+  
+  &:hover .arrowIcon {
+    transform: translateX(4px);
+  }
+  
+  &.active {
+    font-weight: 500;
+    color: #080808;
+    
+    &::after {
+      width: 100%;
+      transition: none;
+    }
+    
+    .arrowIcon {
+      transform: translateX(4px);
+    }
   }
 }
 
-// 애니메이션 관련 스타일
-@keyframes rotateGrinder {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.arrowIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: none;
+  margin-left: 4px;
+  margin-bottom: 2px;
+  transition: transform 0.2s;
 }
 
-@keyframes rotateGrinderReverse {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(-360deg); }
-}
-
-.rotateGrinder {
-  animation: rotateGrinder 1s linear infinite;
-  transform-origin: center;
-}
-
-.rotateGrinderReverse {
-  animation: rotateGrinderReverse 1.2s linear infinite;
-  transform-origin: center;
-}
-
-// 콩 애니메이션
-@keyframes bean0 {
-  0% { transform: translate(0, 0); opacity: 1; }
-  100% { transform: translate(0, 25px); opacity: 0; }
-}
-
-@keyframes bean1 {
-  0% { transform: translate(0, 0); opacity: 1; }
-  100% { transform: translate(-10px, 25px); opacity: 0; }
-}
-
-@keyframes bean2 {
-  0% { transform: translate(0, 0); opacity: 1; }
-  100% { transform: translate(10px, 25px); opacity: 0; }
-}
-
-@keyframes bean3 {
-  0% { transform: translate(0, 0); opacity: 1; }
-  100% { transform: translate(-5px, 20px); opacity: 0; }
-}
-
-.coffeeBean {
-  transform-origin: center;
+/* 반응형 스타일 */
+@media (max-width: 1360px) {
+  .mainContent {
+    flex-direction: column;
+    max-width: 672px;
+  }
   
-  &.bean0 { animation: bean0 1.5s ease-in infinite; }
-  &.bean1 { animation: bean1 1.2s ease-in infinite; }
-  &.bean2 { animation: bean2 1.4s ease-in infinite; }
-  &.bean3 { animation: bean3 1.3s ease-in infinite; }
+  .leftSection,
+  .rightSection {
+    width: 100%;
+  }
+  
+  .rightSection {
+    padding-left: 0;
+    margin-top: 24px;
+  }
 }
 
-// 블렌드 애니메이션
-@keyframes blendingPulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
+@media (max-width: 768px) {
+  .coffeeBeanHeader {
+    padding: 16px 24px;
+  }
+
+  .mainContent {
+    padding: 0 24px;
+  }
+
+  .blendSection {
+    width: 100%;
+  }
+
+  .navigationFooter {
+    padding: 16px 24px;
+  }
 }
 
-.blendingPulse {
-  animation: blendingPulse 1s ease-in-out infinite;
-}
+@media (max-width: 480px) {
+  .coffeeBeanHeader {
+    padding: 12px 16px;
+  }
 
-// 가챠 효과 애니메이션
-@keyframes gatcha {
-  0% { transform: translateY(0); }
-  10% { transform: translateY(-5px); }
-  20% { transform: translateY(0); }
-  30% { transform: translateY(-5px); }
-  40% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-  60% { transform: translateY(0); }
-  100% { transform: translateY(0); }
-}
+  .mainContent {
+    padding: 0 16px;
+  }
 
-.gatcha {
-  animation: gatcha 0.5s ease-in-out;
+  .navigationFooter {
+    padding: 12px 16px;
+  }
 }

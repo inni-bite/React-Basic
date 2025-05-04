@@ -99,53 +99,8 @@ body.landing-active::-webkit-scrollbar-thumb {
   background-color: #FFFFFF;
 }
 
-/* 탭 네비게이션 */
-.tab-navigation {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1.5rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  padding-bottom: 1rem;
-}
-
-.tab-button {
-  background-color: transparent;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 2rem;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #666;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  position: relative;
-}
-
-.tab-button::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: #000;
-  transition: width 0.3s ease;
-}
-
-.tab-button:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-  color: #000;
-}
-
-.tab-button:hover::after {
-  width: 100%;
-}
-
-.tab-button.active {
-  background-color: #000;
-  color: #fff;
-}
+/* 탭 네비게이션 - 사용하지 않음 */
+/* 기존 코드 제거 */
 
 /* 기본 스타일 (변수 수정) */
 :root {
@@ -159,52 +114,8 @@ body.landing-active::-webkit-scrollbar-thumb {
   --text-color-light: #666666;
 }
 
-/* 헤더 스타일 */
-.app-header {
-  text-align: center;
-  padding: 2.5rem 1.5rem 1.5rem;
-  background-color: #FFFFFF;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.app-header h1 {
-  font-size: 2.5rem;
-  font-weight: 800;
-  margin-bottom: 0.5rem;
-  color: #000;
-  letter-spacing: -0.03em;
-  cursor: pointer;
-  position: relative;
-  display: inline-block;
-}
-
-.app-header h1:hover {
-  color: #666;
-}
-
-.app-header h1::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: #000;
-  transition: width 0.3s ease;
-}
-
-.app-header h1:hover::after {
-  width: 100%;
-}
-
-.app-header p {
-  font-size: 1.125rem;
-  color: var(--text-color-light);
-  max-width: 600px;
-  margin: 0 auto;
-  letter-spacing: -0.01em;
-  word-break: keep-all;
-}
+/* 헤더 스타일 - 사용하지 않음 */
+/* 기존 코드 제거 */
 
 /* 메인 콘텐츠 */
 .app-main {
