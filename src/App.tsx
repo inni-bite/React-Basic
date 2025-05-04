@@ -48,45 +48,30 @@ function App() {
   };
   
   return (
-    <div className={`app ${activeTab === 0 ? 'coffee-bean-view' : ''}`}>
+    <>
       {activeTab === -1 ? (
         // 랜딩 페이지
         <LandingPage onSelectTab={setActiveTab} />
       ) : activeTab === 0 ? (
         // Coffee Bean 페이지
         <CoffeeSelector />
-      ) : (
-        // 기존 기능 페이지
-        <>
-          <main className="app-main">
-            {activeTab === 1 ? (
-              // 블렌드 탭
-              <>
-                <div className="machine-container">
-                  <BlendingMachine onBlend={handleBlend} />
-                </div>
-                
-                {/* 블렌드 결과 및 비교 컴포넌트 */}
-                {showBlendResult && <BlendResult />}
-                {showBlendCompare && <BlendCompare />}
-              </>
-            ) : activeTab === 2 ? (
-              // 아카이브 탭 (추후 구현)
-              <div className="archive-container">
-                <h2>아카이브 기능은 현재 개발 중입니다.</h2>
-              </div>
-            ) : null}
-          </main>
-          
-          <footer className="app-footer">
-            <p>© {new Date().getFullYear()} Coffee Explorer. All rights reserved.</p>
-          </footer>
-        </>
-      )}
+      ) : activeTab === 1 ? (
+        // 블렌드 탭
+        <div className="machine-container">
+          <BlendingMachine onBlend={handleBlend} />
+          {showBlendResult && <BlendResult />}
+          {showBlendCompare && <BlendCompare />}
+        </div>
+      ) : activeTab === 2 ? (
+        // 아카이브 탭
+        <div className="archive-container">
+          <h2>아카이브 기능은 현재 개발 중입니다.</h2>
+        </div>
+      ) : null}
       
       {/* Coffee details modal (controlled by jotai state) */}
       <CoffeeDetails />
-    </div>
+    </>
   );
 }
 

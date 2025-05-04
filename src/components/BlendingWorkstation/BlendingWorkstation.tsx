@@ -169,20 +169,12 @@ const BlendingWorkstation: React.FC = () => {
     setBlendingComponents(blendingComponents.filter(comp => comp.beanId !== beanId));
   };
   
-  // 작업 취소 및 창 닫기
-  const handleClose = () => {
-    setShowBlendingWorkstation(false);
-  };
-  
   return (
     <div className={styles.blendingWorkstation}>
       <div className={styles.container}>
         <div className={styles.resetButtonContainer}>
           <button className={styles.resetButton} onClick={handleReset}>
             Reset
-          </button>
-          <button className={styles.closeButton} onClick={handleClose}>
-            Close
           </button>
         </div>
         

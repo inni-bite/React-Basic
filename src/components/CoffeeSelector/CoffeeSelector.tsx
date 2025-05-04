@@ -127,9 +127,7 @@ const CoffeeSelector: React.FC<CoffeeSelectorProps> = ({
 
       {/* 헤더: 로고 표시, 클릭 시 새로고침 */}
       <div className={styles.coffeeBeanHeader}>
-        <div className={styles.logo} onClick={handleLogoClick}>
-          <h1 className={styles.clickableLogo}>Coffee2</h1>
-        </div>
+        <h1 className={styles.clickableLogo} onClick={handleLogoClick}>Coffee2</h1>
       </div>
 
       {/* 콘텐츠: 카드 레이아웃 */}
