@@ -1,99 +1,97 @@
+/* 
+  이미지 컨테이너: 이미지를 감싸는 기본 레이아웃.
+  이미지 로딩 및 오류 상태를 위한 상대적 위치 설정.
+*/
 .imageContainer {
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  background-color: #f5f5f5;
-  border-radius: 2px;
-}
+  overflow: hidden; /* 콘텐츠 초과 분 숨김 */
+  background-color: #f5f5f5; /* 기본 배경색 */
+  border-radius: 2px; /* 둥근 모서리 */
 
-.image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; // 이미지 비율을 유지하면서 컨테이너 채우기
-  transition: transform 0.3s ease;
-  display: block;
-  background-color: #f5f5f5;
-}
-
-// 이미지 로딩 중 표시할 플레이스홀더
-.loadingPlaceholder {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #f5f5f5;
-}
-
-// 로딩 스피너
-.loadingSpinner {
-  width: 24px;
-  height: 24px;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  border-top: 2px solid #000;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-// 이미지 로딩 오류 시 표시할 플레이스홀더
-.errorPlaceholder {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #f5f5f5;
-}
-
-// 오류 아이콘
-.errorIcon {
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #ddd;
-  border-radius: 50%;
-  color: #555;
-  font-weight: bold;
-  font-size: 18px;
-}
-
-// 스피너 애니메이션
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
+  /* 
+    이미지: 컨테이너를 채우는 주요 요소.
+    호버 시 부드러운 전환 효과 적용.
+  */
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 비율 유지하며 채우기 */
+    transition: transform 0.3s ease; /* 부드러운 확대/축소 */
+    display: block; /* 블록 요소로 렌더링 */
+    background-color: #f5f5f5; /* 배경과 통일 */
   }
-  100% {
-    transform: rotate(360deg);
+
+  /* 
+    로딩 플레이스홀더: 이미지 로딩 중 표시.
+    중앙 정렬 및 배경 설정.
+  */
+  .loadingPlaceholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5; /* 배경과 통일 */
+  }
+
+  /* 
+    오류 플레이스홀더: 이미지 로딩 실패 시 표시.
+    중앙 정렬 및 배경 설정.
+  */
+  .errorPlaceholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5; /* 배경과 통일 */
+  }
+
+  /* 
+    오류 아이콘: 오류 상태를 시각적으로 표시.
+    원형 디자인과 텍스트 포함.
+  */
+  .errorIcon {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ddd; /* 회색 배경 */
+    border-radius: 50%; /* 원형 */
+    color: #555; /* 텍스트 색상 */
+    font-weight: bold; /* 굵은 텍스트 */
+    font-size: 18px; /* 텍스트 크기 */
   }
 }
 
-// 미디어 쿼리로 반응형 대응
+/* 
+  반응형 디자인: 작은 화면 및 고해상도 디스플레이 대응.
+*/
 @media (max-width: 768px) {
   .loadingSpinner {
-    width: 20px;
-    height: 20px;
+    width: 20px; /* 크기 축소 */
+    height: 20px; /* 크기 축소 */
   }
-  
+
   .errorIcon {
-    width: 24px;
-    height: 24px;
-    font-size: 14px;
+    width: 24px; /* 크기 축소 */
+    height: 24px; /* 크기 축소 */
+    font-size: 14px; /* 텍스트 크기 조정 */
   }
 }
 
-// 2배 이상의 고해상도 화면 대응 (Retina 디스플레이 등)
 @media (min-resolution: 2dppx) {
-  .image {
-    image-rendering: -webkit-optimize-contrast; // 이미지 선명도 개선 (WebKit)
-    image-rendering: crisp-edges; // 이미지 선명도 개선 (Firefox)
+  .imageContainer .image {
+    image-rendering: -webkit-optimize-contrast; /* WebKit 선명도 개선 */
+    image-rendering: crisp-edges; /* Firefox 선명도 개선 */
   }
 }

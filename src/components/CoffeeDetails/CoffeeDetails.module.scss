@@ -1,11 +1,13 @@
-// Variables
+/* 
+  변수 정의: 전역적으로 사용되는 색상, 간격, 폰트 무게.
+  유지보수를 용이하게 하기 위해 한 곳에 모음.
+*/
 $background-color: #F1EDE5;
 $text-color: #080808;
 $highlight-color: #B09EFF;
 $border-color: #080808;
 $section-spacing: 24px;
 
-// Font weights
 $font-weight-light: 300;
 $font-weight-regular: 400;
 $font-weight-medium: 500;
@@ -13,7 +15,10 @@ $font-weight-semibold: 600;
 $font-weight-bold: 750;
 $font-weight-black: 900;
 
-// Mixins
+/* 
+  믹스인: 재사용 가능한 스타일 블록.
+  섹션 제목과 구분선을 정의.
+*/
 @mixin sectionTitle {
   font-family: 'Univers Next Pro', sans-serif;
   font-weight: $font-weight-black;
@@ -31,7 +36,10 @@ $font-weight-black: 900;
   background-repeat: repeat-x;
 }
 
-// Modal Container
+/* 
+  모달 오버레이: 배경을 덮는 반투명 레이어.
+  중앙 정렬 및 높은 z-index로 앞에 표시.
+*/
 .modalOverlay {
   position: fixed;
   top: 0;
@@ -45,34 +53,40 @@ $font-weight-black: 900;
   z-index: 1000;
 }
 
+/* 
+  모달 콘텐츠: 모달 내부 컨텐츠 영역.
+  스크롤 가능하며 반응형으로 조정.
+*/
 .modalContent {
   background-color: $background-color;
   border-radius: 15px;
-  padding: 24px;
-  width: 600px; // 너비 조금 더 넓게 조정
-  max-width: 90vw;
-  max-height: 90vh;
-  overflow-y: auto;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  
-  // 스크롤바 숨기기
+  padding: 32px 24px;
+  width: 600px; /* 기본 너비 */
+  max-width: 90vw; /* 화면 너비에 맞게 조정 */
+  max-height: 90vh; /* 화면 높이에 맞게 조정 */
+  overflow-y: auto; /* 세로 스크롤 */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* 부드러운 그림자 */
+
+  /* 스크롤바 숨기기 */
   &::-webkit-scrollbar {
     width: 0;
     background: transparent;
   }
-  
-  scrollbar-width: none; // Firefox
-  -ms-overflow-style: none; // IE and Edge
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
 }
 
-// Header Section
+/* 
+  헤더 섹션: 제목과 종료 버튼 포함.
+  하단에 구분선 추가.
+*/
 .header {
   display: flex;
   flex-direction: column;
-  gap: 0px;
+  gap: 0;
   padding-bottom: 16px;
   position: relative;
-  
+
   &::after {
     content: '';
     position: absolute;
@@ -81,124 +95,129 @@ $font-weight-black: 900;
     right: 0;
     @include sectionDivider;
   }
-}
 
-.titleContainer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  gap: 15px;
-}
+  .titleContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 16px;
+  }
 
-.title {
-  font-family: 'Univers Next Pro', sans-serif;
-  font-weight: $font-weight-black;
-  font-size: 32px;
-  line-height: 1.6em;
-  color: $text-color;
-  margin: 0;
-}
+  .title {
+    font-family: 'Univers Next Pro', sans-serif;
+    font-weight: $font-weight-black;
+    font-size: 32px;
+    line-height: 1.6em;
+    color: $text-color;
+    margin: 0;
+  }
 
-.koreanTitle {
-  font-family: 'Univers Next Pro', sans-serif;
-  font-weight: $font-weight-regular;
-  font-size: 18px;
-  line-height: 1.6em;
-  color: $text-color;
-  width: 100%;
-  margin: 0;
-}
+  .koreanTitle {
+    font-family: 'Univers Next Pro', sans-serif;
+    font-weight: $font-weight-regular;
+    font-size: 18px;
+    line-height: 1.6em;
+    color: $text-color;
+    width: 100%;
+    margin: 0;
+  }
 
-.exitButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 24px;
-  height: 24px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  
-  svg {
+  .exitButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 24px;
     height: 24px;
-    color: $text-color;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+
+    svg {
+      width: 24px;
+      height: 24px;
+      color: $text-color;
+    }
   }
 }
 
-// Profile Section
+/* 
+  프로필 섹션: 사용자 정보 표시.
+  구분선 제거 및 간격 조정.
+*/
 .profileSection {
   display: flex;
   flex-direction: column;
   gap: 12px;
   padding: $section-spacing 0 12px;
   position: relative;
-  
-  // 점선 제거 (Summary Text 위에 점선 없애기)
+
   &::after {
-    content: none;
+    content: none; /* Summary Text 위 구분선 제거 */
+  }
+
+  .profileTitle {
+    @include sectionTitle;
+    margin: 0;
+  }
+
+  .profileGrid {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+  }
+
+  .profileItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 8px;
+    width: 100%;
+
+    &:first-child {
+      border: 1px solid $border-color;
+    }
+
+    &:not(:first-child) {
+      border-bottom: 1px solid $border-color;
+      border-left: 1px solid $border-color;
+      border-right: 1px solid $border-color;
+    }
+
+    &:last-child {
+      border-bottom: 1px solid $border-color;
+    }
+  }
+
+  .profileLabel {
+    font-family: 'Univers Next Pro', sans-serif;
+    font-weight: $font-weight-bold;
+    font-size: 16px;
+    line-height: 1.6em;
+    color: $text-color;
+    flex: 0 0 auto;
+    width: auto;
+    max-width: 45%;
+    margin: 0;
+  }
+
+  .profileValue {
+    font-family: 'Univers Next Pro', sans-serif;
+    font-weight: $font-weight-light;
+    font-size: 16px;
+    line-height: 1.6em;
+    color: $text-color;
+    margin: 0;
+    margin-left: auto;
   }
 }
 
-.profileTitle {
-  @include sectionTitle;
-  margin: 0;
-}
-
-.profileGrid {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin: 0;
-}
-
-.profileItem {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 12px 8px;
-  width: 100%;
-  
-  &:first-child {
-    border: 1px solid $border-color;
-  }
-  
-  &:not(:first-child) {
-    border-bottom: 1px solid $border-color;
-    border-left: 1px solid $border-color;
-    border-right: 1px solid $border-color;
-  }
-  
-  &:last-child {
-    border-bottom: 1px solid $border-color;
-  }
-}
-
-.profileLabel {
-  font-family: 'Univers Next Pro', sans-serif;
-  font-weight: $font-weight-bold;
-  font-size: 16px;
-  line-height: 1.6em;
-  color: $text-color;
-  flex: 0 0 auto; // Label 너비 조정
-  width: auto;
-  max-width: 45%; // Label 최대 너비 제한
-  margin: 0;
-}
-
-.profileValue {
-  font-family: 'Univers Next Pro', sans-serif;
-  font-weight: $font-weight-light;
-  font-size: 16px;
-  line-height: 1.6em;
-  color: $text-color;
-  margin: 0;
-  margin-left: auto; // 오른쪽으로 밀어내기
-}
-
-// Summary Section
+/* 
+  요약 섹션: 중앙 정렬 텍스트 표시.
+  하단에 구분선 추가.
+*/
 .summarySection {
   display: flex;
   justify-content: center;
@@ -206,7 +225,7 @@ $font-weight-black: 900;
   width: 100%;
   padding: $section-spacing 0;
   position: relative;
-  
+
   &::after {
     content: '';
     position: absolute;
@@ -215,18 +234,21 @@ $font-weight-black: 900;
     right: 0;
     @include sectionDivider;
   }
+
+  .summaryText {
+    font-family: 'Univers Next Pro', sans-serif;
+    font-weight: $font-weight-regular;
+    font-size: 16px;
+    line-height: 1.6em;
+    color: $text-color;
+    margin: 0;
+  }
 }
 
-.summaryText {
-  font-family: 'Univers Next Pro', sans-serif;
-  font-weight: $font-weight-regular;
-  font-size: 16px;
-  line-height: 1.6em;
-  color: $text-color;
-  margin: 0;
-}
-
-// Flavours Section
+/* 
+  플레이버 섹션: 맛 프로필 카드 표시.
+  하단에 구분선 추가.
+*/
 .flavoursSection {
   display: flex;
   flex-direction: column;
@@ -234,7 +256,7 @@ $font-weight-black: 900;
   width: 100%;
   padding: $section-spacing 0;
   position: relative;
-  
+
   &::after {
     content: '';
     position: absolute;
@@ -243,69 +265,72 @@ $font-weight-black: 900;
     right: 0;
     @include sectionDivider;
   }
+
+  .flavoursTitle {
+    @include sectionTitle;
+    margin: 0;
+  }
+
+  .flavourGrid {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 0 0;
+    width: 100%;
+  }
+
+  .flavourCard {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* 왼쪽 정렬로 변경 */
+    gap: 18px;
+    width: 126px;
+  }
+
+  .imageContainer {
+    position: relative;
+    width: 110px;
+    height: 110px;
+  }
+
+  .imageBorder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 120px;
+    height: 120px;
+    border: 1.5px solid $border-color;
+    border-radius: 50%;
+  }
+
+  .flavorImage {
+    position: absolute;
+    top: 14px; /* 아래로 14px 이동 */
+    right: 8px; /* 왼쪽으로 8px 이동 */
+    width: 110px;
+    height: 110px;
+    background-color: #D9D9D9;
+    border-radius: 50%;
+    object-fit: cover;
+    z-index: 1;
+  }
+
+  .flavourName {
+    font-family: 'Univers Next Pro', sans-serif;
+    font-weight: $font-weight-regular;
+    font-size: 16px;
+    line-height: 1.6em;
+    color: $text-color;
+    text-align: left;
+    margin: 0;
+  }
 }
 
-.flavoursTitle {
-  @include sectionTitle;
-  margin: 0;
-}
-
-.flavourGrid {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 16px 0 0;
-  width: 100%;
-}
-
-.flavourCard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  width: 126px;
-}
-
-.imageContainer {
-  position: relative;
-  width: 120px;
-  height: 120px;
-}
-
-.imageBorder {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 120px;
-  height: 120px;
-  border: 1.5px solid $border-color;
-  border-radius: 50%;
-}
-
-.flavorImage {
-  position: absolute;
-  top: 6px; // 테두리 위에서 6px 아래로 이동
-  left: 6px; // 테두리 위에서 6px 오른쪽으로 이동
-  width: 110px; // 110px 고정 크기
-  height: 110px; // 110px 고정 크기
-  background-color: #D9D9D9;
-  border-radius: 50%;
-  object-fit: cover;
-  z-index: 2; // 테두리 위에 표시
-}
-
-.flavourName {
-  font-family: 'Univers Next Pro', sans-serif;
-  font-weight: $font-weight-regular;
-  font-size: 16px;
-  line-height: 1.6em;
-  color: $text-color;
-  text-align: center;
-  margin: 0;
-}
-
-// Tasting Section
+/* 
+  테이스팅 섹션: 맛 옵션 선택 UI.
+  하단에 구분선 추가.
+*/
 .tastingSection {
   display: flex;
   flex-direction: column;
@@ -313,7 +338,7 @@ $font-weight-black: 900;
   width: 100%;
   padding: $section-spacing 0;
   position: relative;
-  
+
   &::after {
     content: '';
     position: absolute;
@@ -322,123 +347,118 @@ $font-weight-black: 900;
     right: 0;
     @include sectionDivider;
   }
-}
 
-.tastingTitle {
-  @include sectionTitle;
-  margin: 0;
-}
-
-.tastingOptions {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  width: 100%;
-}
-
-.tastingOption {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  
-  &.sweetOption {
-    gap: 51px;
+  .tastingTitle {
+    @include sectionTitle;
+    margin: 0;
   }
-  
-  &.bodyOption {
-    justify-content: space-between;
-    gap: 55px;
-  }
-  
-  &.acidityOption {
-    gap: 41px;
-  }
-  
-  &.bitterOption {
-    gap: 67px;
-  }
-}
 
-.tastingLabel {
-  font-family: 'Univers Next Pro', sans-serif;
-  font-weight: $font-weight-semibold;
-  font-size: 16px;
-  line-height: 1.6em;
-  color: $text-color;
-  white-space: pre-line;
-  min-width: 85px;
-  margin: 0;
-}
+  .tastingOptions {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+  }
 
-.optionValues {
-  display: flex;
-  flex-direction: row;
-  gap: 24px;
-  overflow: visible; // 잘림 방지
-}
+  .tastingOption {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px; /* 간격 유지 */
+  }
 
-.optionValue {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 8px;
-  border-radius: 15px;
-  font-family: 'Univers Next Pro', sans-serif;
-  font-weight: $font-weight-light;
-  font-size: 16px;
-  line-height: 1.6em;
-  color: $text-color;
-  margin: 0;
-  
-  &.selected {
-    background-color: $highlight-color;
-    font-weight: $font-weight-medium;
-    padding: 8px; // 모든 방향 패딩 동일하게
+  .tastingLabel {
+    font-family: 'Univers Next Pro', sans-serif;
+    font-weight: $font-weight-bold;
+    font-size: 16px;
+    line-height: 1.6em;
+    color: $text-color;
+    white-space: pre-line;
+    width: 85px; /* 고정 너비로 시작 위치 통일 */
+    margin: 0;
+  }
+
+  .optionValues {
+    display: flex;
+    flex-direction: row;
+    gap: 12px; /* 간격 유지 */
+    overflow: visible;
+    justify-content: space-evenly; /* 항목 간 간격을 균일하게 조정 */
+    width: 100%; /* 전체 너비 활용 */
+  }
+
+  .optionValue {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 8px; /* 위아래 4px, 좌우 8px */
+    border-radius: 15px;
+    font-family: 'Univers Next Pro', sans-serif;
+    font-weight: $font-weight-light;
+    font-size: 16px;
+    line-height: 1.6em;
+    color: $text-color;
+    margin: 0;
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+    width: 70px; /* 고정 너비로 변경하여 중앙 정렬 보장 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+
+    &.selected {
+      background-color: $highlight-color;
+      font-weight: $font-weight-medium;
+      padding: 4px 8px;
+      width: 70px; /* 선택 시 동일한 너비 */
+    }
   }
 }
 
-// Perfect For Section
+/* 
+  완벽한 조합 섹션: 텍스트 기반 설명.
+  구분선 제외.
+*/
 .perfectForSection {
   display: flex;
   flex-direction: column;
   gap: 24px;
   width: 100%;
   padding: $section-spacing 0;
+
+  .perfectForTitle {
+    @include sectionTitle;
+    margin: 0;
+  }
+
+  .perfectForText {
+    font-family: 'Univers Next Pro', sans-serif;
+    font-weight: $font-weight-regular;
+    font-size: 16px;
+    line-height: 1.6em;
+    color: $text-color;
+    margin: 0;
+  }
 }
 
-.perfectForTitle {
-  @include sectionTitle;
-  margin: 0;
-}
-
-.perfectForText {
-  font-family: 'Univers Next Pro', sans-serif;
-  font-weight: $font-weight-regular;
-  font-size: 16px;
-  line-height: 1.6em;
-  color: $text-color;
-  margin: 0;
-}
-
-// Responsive adjustments
+/* 
+  반응형 디자인: 작은 화면에서 레이아웃 조정.
+*/
 @media (max-width: 600px) {
   .modalContent {
     padding: 16px;
     width: 100%;
     max-width: 95vw;
   }
-  
+
   .flavourGrid {
     flex-wrap: wrap;
     justify-content: center;
   }
-  
+
   .tastingOption {
     flex-direction: column;
     align-items: flex-start;
     gap: 12px !important;
   }
-  
+
   .optionValues {
     flex-wrap: wrap;
   }

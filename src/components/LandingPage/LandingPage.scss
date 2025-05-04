@@ -1,219 +1,243 @@
+:root {
+  --color-bg: #080808; /* 랜딩 페이지 배경: 검정색 */
+  --color-text: #ffffff; /* 기본 텍스트 색상: 흰색 */
+  --color-divider: rgba(255, 255, 255, 0.1); /* 구분선 색상: 투명한 흰색 */
+  --font-primary: 'Univers Next Pro', sans-serif; /* 기본 글꼴: 현대적이고 깔끔 */
+  --padding-page: 48px; /* 페이지 좌우 여백 */
+  --padding-small: 16px; /* 헤더와 푸터의 위아래 여백 */
+  --font-size-large: 28px; /* 큰 텍스트 크기 (로고, 버튼 등) */
+  --font-size-medium: 24px; /* 모바일에서 작은 텍스트 */
+  --transition-fast: 0.3s ease; /* 빠른 애니메이션 (호버 등) */
+  --transition-medium: 0.3s ease; /* 중간 속도 애니메이션 (밑줄 등) */
+  --transition-slow: 0.5s ease; /* 느린 애니메이션 (이미지 페이드) */
+  --z-index-high: 2; /* 헤더, 푸터 등 위에 표시 */
+  --z-index-low: 0; /* 배경 이미지 등 뒤에 표시 */
+  --z-index-middle: 1; /* 구분선 등 중간 */
+}
+
+/* 랜딩 페이지: 전체 페이지를 감싸는 박스. 세로로 콘텐츠를 배치하고, 검정 배경에 흰 텍스트로 깔끔한 디자인 */
 .landing-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: #080808;
-  color: #fff;
-  width: 100%;
-  height: 100vh;
-  /* max-height: 100vh 제거 */
-  padding: 0 48px;
-  box-sizing: border-box;
-  font-family: 'Univers Next Pro', sans-serif;
-  position: relative;
+  display: flex; /* 콘텐츠를 유연하게 배치 */
+  flex-direction: column; /* 콘텐츠를 위에서 아래로 쌓이도록 */
+  justify-content: space-between; /* 헤더, 본문, 푸터를 균등히 분배 */
+  background-color: var(--color-bg); /* 검정색 배경 */
+  color: var(--color-text); /* 흰색 텍스트 */
+  width: 100%; /* 화면 너비 전체 */
+  height: 100vh; /* 화면 높이 전체 */
+  padding: 0 var(--padding-page); /* 좌우 48px 여백 */
+  box-sizing: border-box; /* 여백과 테두리를 너비에 포함 */
+  font-family: var(--font-primary); /* 현대적인 글꼴 */
+  position: relative; /* 배경 이미지와 애니메이션을 자유롭게 배치 */
 }
 
-/* 헤더 스타일 */
+/* 헤더: 페이지 상단에 로고와 태그라인을 배치. 양쪽 끝에 콘텐츠를 정렬해 깔끔한 레이아웃. */
 .landing-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  padding: 16px 0;
-  position: relative;
-  z-index: 2;
-
-  .logo {
-    cursor: pointer;
-    
-    h1 {
-      font-family: 'Univers Next Pro', sans-serif;
-      font-size: 28px;
-      font-weight: 400;
-      letter-spacing: -0.04em;
-      margin: 0;
-      color: #ffffff;
-      position: relative;
-      display: inline-block;
-      
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        width: 0;
-        height: 1px;
-        background-color: #ffffff;
-        transition: width 0.3s ease;
-      }
-      
-      &:hover::after {
-        width: 100%;
-      }
-    }
-  }
-
-  .tagline {
-    p {
-      font-family: 'Univers Next Pro', sans-serif;
-      font-size: 28px;
-      font-weight: 400;
-      letter-spacing: -0.04em;
-      margin: 0;
-      color: #ffffff;
-    }
-  }
+  display: flex; /* 로고와 태그라인을 가로로 배치 */
+  justify-content: space-between; /* 양쪽 끝에 정렬 */
+  align-items: center; /* 세로 가운데 정렬 */
+  width: 100%; /* 헤더가 페이지 너비를 채움 */
+  padding: var(--padding-small) 0; /* 위아래 16px 여백 */
+  position: relative; /* 다른 요소와 겹칠 때 우선순위 조정 */
+  z-index: var(--z-index-high); /* 헤더가 배경 위에 표시 */
 }
 
-/* 구분선 */
+/* 로고 텍스트: 페이지 제목처럼 큰 텍스트. 호버 시 밑줄이 부드럽게 나타남. */
+.landing-header .logo h1 {
+  font-family: var(--font-primary); /* 현대적인 글꼴 */
+  font-size: var(--font-size-large); /* 28px 크기 */
+  font-weight: 400; /* 보통 굵기 */
+  letter-spacing: -0.04em; /* 글자 간격 살짝 좁게 */
+  margin: 0; /* 불필요한 여백 제거 */
+  color: var(--color-text); /* 흰색 텍스트 */
+  position: relative; /* 밑줄을 자유롭게 배치 */
+  display: inline-block; /* 밑줄이 텍스트 너비에 맞도록 */
+}
+
+/* 로고 밑줄: 호버 시 나타나는 흰색 선. 처음엔 안 보이다가 부드럽게 확장 */
+.landing-header .logo h1::after {
+  content: ''; /* 빈 요소로, 스타일만 적용 */
+  position: absolute; /* 텍스트 하단에 고정 */
+  bottom: -2px; /* 텍스트 아래 2px */
+  left: 0; /* 텍스트 왼쪽부터 시작 */
+  width: 0; /* 처음엔 너비 0 (안 보임) */
+  height: 1px; /* 얇은 선 */
+  background-color: var(--color-text); /* 흰색 선 */
+  transition: width var(--transition-medium); /* 너비가 0.3초간 부드럽게 확장 */
+}
+
+/* 로고 호버: 마우스를 올리면 밑줄이 전체 너비로 확장 */
+.landing-header .logo h1:hover::after {
+  width: 100%; /* 밑줄이 텍스트 전체 너비를 채움 */
+}
+
+/* 태그라인: 헤더 오른쪽에 표시되는 문구. 로고와 비슷한 스타일로 일관성 유지. */
+.landing-header .tagline p {
+  font-family: var(--font-primary); /* 동일한 글꼴 */
+  font-size: var(--font-size-large); /* 28px 크기 */
+  font-weight: 400; /* 보통 굵기 */
+  letter-spacing: -0.04em; /* 글자 간격 살짝 좁게 */
+  margin: 0; /* 불필요한 여백 제거 */
+  color: var(--color-text); /* 흰색 텍스트 */
+}
+
+/* 구분선: 헤더 아래에 얇은 선. 페이지의 섹션을 구분하는 시각적 요소 */
 .divider {
-  position: absolute;
-  width: calc(100% - 96px);
-  height: 1px;
-  background-color: rgba(255, 255, 255, 0.1);
-  margin-top: 64px;
-  z-index: 1;
+  position: absolute; /* 페이지 상단에 고정 */
+  width: calc(100% - 96px); /* 좌우 여백(48px*2)을 뺀 너비 */
+  height: 1px; /* 얇은 선 */
+  background-color: var(--color-divider); /* 투명한 흰색 */
+  margin-top: 64px; /* 헤더 아래 64px 위치 */
+  z-index: var(--z-index-middle); /* 배경 위, 헤더 아래 표시 */
 }
 
-/* 배경 이미지 */
-.background-image {
-  position: absolute;
-  top: 50%;
-  right: 10%;
-  transform: translateY(-50%);
-  z-index: 0;
-  opacity: 0.5;
-}
-
-/* 로고 애니메이션 영역 */
+/* 로고 애니메이션: 중앙에 로고 이미지를 애니메이션으로 표시. 여러 이미지가 페이드 인/아웃 효과로 전환. */
 .logo-animation {
-  position: absolute;
-  top: 50%;
-  right: 25%; /* 화면 너비 반의 중앙에 배치 */
-  transform: translateY(-50%);
-  z-index: 0;
-  width: 200px;
-  height: 200px;
+  position: absolute; /* 페이지 중앙에 배치 */
+  top: 50%; /* 세로 중앙 */
+  right: 25%; /* 오른쪽에서 25% (화면의 1/4 지점) */
+  transform: translateY(-50%); /* 세로 중앙 정렬 */
+  z-index: var(--z-index-low); /* 배경과 함께 뒤에 표시 */
+  width: 200px; /* 애니메이션 영역 너비 */
+  height: 200px; /* 애니메이션 영역 높이 */
 }
 
+/* 로고 애니메이션 이미지: 애니메이션에 사용되는 개별 이미지. 처음엔 안 보이다가 active 클래스로 표시. */
 .logo-animation img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  object-fit: contain; /* 이미지 비율 유지 */
+  position: absolute; /* 애니메이션 영역 안에 고정 */
+  top: 0; /* 영역 상단에 붙음 */
+  left: 0; /* 영역 왼쪽에 붙음 */
+  width: 100%; /* 영역 너비 전체 */
+  height: 100%; /* 영역 높이 전체 */
+  opacity: 0; /* 처음엔 투명 (안 보임) */
+  transition: opacity var(--transition-slow); /* 투명도가 0.5초간 부드럽게 바뀜 */
+  object-fit: contain; /* 이미지 비율을 유지하며 영역에 맞춤 */
 }
 
-/* Coffee-bean.png를 더 크게 표시 */
+/* 커피콩 이미지: coffee-bean.png를 3배 크게 표시. 중앙을 기준으로 확대. */
 .logo-animation img[src*="coffee-bean"] {
-  transform: scale(3);
-  transform-origin: center;
+  transform: scale(2.5); /* 이미지를 2.5배 크게 */
+  transform-origin: center; /* 확대 기준점을 이미지 중앙으로 */
 }
 
+/*  활성 이미지: active 클래스가 붙은 이미지만 보임. 투명도를 1로 바꿔 표시. */
 .logo-animation img.active {
-  opacity: 1;
+  opacity: 1; /* 완전히 보이게 */
 }
 
-/* 푸터 내비게이션 */
+/* 푸터: 페이지 하단에 내비게이션 버튼을 배치. 양쪽 끝에 버튼을 정렬해 깔끔한 레이아웃. */
 .landing-footer {
-  display: flex;
-  justify-content: space-between;
-  padding: 16px 0;
-  margin-bottom: 16px;
-  position: relative;
-  z-index: 2;
-
-  .nav-button {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: transparent;
-    border: none;
-    color: #fff;
-    font-family: 'Univers Next Pro', sans-serif;
-    font-size: 28px;
-    font-weight: 400;
-    letter-spacing: -0.04em;
-    cursor: pointer;
-    padding: 0;
-    transition: color 0.2s ease;
-    line-height: 1;
-    position: relative;
-
-    &:hover {
-      color: rgba(255, 255, 255, 0.7);
-      
-      &::after {
-        width: 100%;
-      }
-      
-      .arrow-icon {
-        transform: translateX(4px);
-      }
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background-color: #ffffff;
-      transition: width 0.3s ease;
-    }
-
-    .arrow-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transform: none; /* 추가 회전 제거 */
-      margin-left: 8px;
-      margin-bottom: 2px; /* 텍스트와 정렬 조정 */
-      transition: transform 0.2s ease;
-    }
-  }
+  display: flex; /* 버튼을 가로로 배치 */
+  justify-content: space-between; /* 양쪽 끝에 정렬 */
+  padding: var(--padding-small) 0; /* 위아래 16px 여백 */
+  margin-bottom: var(--padding-small); /* 하단 16px 여백 */
+  position: relative; /* 다른 요소와 겹칠 때 우선순위 조정 */
+  z-index: var(--z-index-high); /* 푸터가 배경 위에 표시 */
 }
 
-/* 반응형 디자인 */
-@media (max-width: 768px) {
+/* 내비게이션 버튼: 푸터의 클릭 가능한 버튼. 텍스트와 화살표 아이콘을 포함, 호버 시 효과 추가. */
+.landing-footer .nav-button {
+  display: flex; /* 텍스트와 아이콘을 가로로 정렬 */
+  align-items: center; /* 세로 가운데 정렬 */
+  gap: 4px; /* 텍스트와 아이콘 사이 간격 */
+  background: transparent; /* 배경 없음 */
+  color: var(--color-text); /* 흰색 텍스트 */
+  font-family: var(--font-primary); /* 동일한 글꼴 */
+  font-size: var(--font-size-large); /* 28px 크기 */
+  font-weight: 400; /* 보통 굵기 */
+  letter-spacing: -0.04em; /* 글자 간격 살짝 좁게 */
+  padding: 0; /* 불필요한 여백 제거 */
+  line-height: 1; /* 텍스트 줄 높이를 조정 */
+  position: relative; /* 밑줄을 자유롭게 배치 */
+}
+.landing-footer .nav-button:focus, .landing-footer .nav-button:active {
+  outline: none;
+}
+
+/* 버튼 밑줄: 호버 시 나타나는 흰색 선.로고와 비슷한 애니메이션 효과.*/
+.landing-footer .nav-button::after {
+  content: ''; /* 빈 요소로, 스타일만 적용 */
+  position: absolute; /* 버튼 하단에 고정 */
+  bottom: -4px; /* 버튼 아래 4px */
+  left: 0; /* 버튼 왼쪽부터 시작 */
+  width: 0; /* 처음엔 너비 0 (안 보임) */
+  height: 1px; /* 얇은 선 */
+  background-color: var(--color-text); /* 흰색 선 */
+  transition: width var(--transition-medium); /* 너비가 0.3초간 부드럽게 확장 */
+}
+
+/* 버튼 호버 시 밑줄: 전체 너비로 확장. */
+.landing-footer .nav-button:hover::after {
+  width: 100%; /* 밑줄이 버튼 전체 너비를 채움 */
+}
+
+/*  화살표 아이콘: 버튼 옆에 표시되는 화살표. 호버 시 오른쪽으로 살짝 이동.*/
+.landing-footer .nav-button .arrow-icon {
+  display: flex; /* 아이콘을 유연하게 배치 */
+  align-items: center; /* 세로 가운데 정렬 */
+  justify-content: center; /* 가로 가운데 정렬 */
+  transform: none; /* 기본 상태에서 회전 없음 */
+  margin-left: 4px; /* 텍스트와 간격 */
+  margin-bottom: 2px; /* 텍스트와 세로 정렬 조정 */
+  transition: transform var(--transition-fast); /* 이동이 0.2초간 부드럽게 */
+}
+
+/* 화살표 호버: 마우스를 올리면 오른쪽으로 4px 이동. */
+.landing-footer .nav-button:hover .arrow-icon {
+  transform: translateX(4px); /* 오른쪽으로 이동 */
+}
+
+/* 반응형 디자인: 화면이 880px 이하일 때(모바일 등) 스타일 조정. 작은 화면에 맞게 여백, 크기, 레이아웃 변경. */
+@media (max-width: 880px) {
   .landing-page {
-    padding: 0 24px;
+    padding: 0 24px; /* 좌우 여백을 24px로 줄임 */
   }
 
   .landing-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-    
-    .logo h1 {
-      font-size: 28px;
-    }
-    
-    .tagline {
-      margin-top: 20px; /* 태그라인을 로고 아래로 위치시키고 간격 조정 */
-      
-      p {
-        text-align: left;
-        font-size: 18px; /* 텍스트 크기 조정 */
-      }
-    }
+    flex-direction: column; /* 로고와 태그라인을 세로로 쌓이도록 */
+    align-items: flex-start; /* 왼쪽 정렬 */
+    gap: 16px; /* 로고와 태그라인 사이 간격 */
+  }
+
+  .landing-header .logo h1 {
+    font-size: var(--font-size-large); /* 로고 크기 유지 (28px) */
+  }
+
+  .landing-header .tagline {
+    margin-top: 16px; /* 태그라인을 로고 아래로 띄움 */
+  }
+
+  .landing-header .tagline p {
+    text-align: left; /* 텍스트를 왼쪽 정렬 */
+    font-size: var(--font-size-medium); /* 18px로 작게 */
   }
 
   .landing-footer {
-    flex-direction: column;
-    gap: 24px;
+    flex-direction: column; /* 버튼을 세로로 쌓이도록 */
+    gap: 24px; /* 버튼 사이 간격 */
   }
   
+  /* 모바일에서 버튼 스타일 조정: width 속성을 fit-content로 설정해 텍스트 너비에 맞게 조정 */
+  .landing-footer .nav-button {
+    width: fit-content; /* 버튼 너비를 텍스트 너비에 맞게 조정 */
+  }
+  
+  /* 모바일에서 밑줄이 텍스트 너비에 맞게 조정되도록 설정 */
+  .landing-footer .nav-button::after {
+    width: 0; /* 기본 상태는 보이지 않게 */
+    max-width: 100%; /* 최대 너비는 텍스트 너비로 제한 */
+  }
+  
+  /* 호버 시에도 텍스트 너비를 넘지 않도록 설정 */
+  .landing-footer .nav-button:hover::after {
+    width: 100%; /* 텍스트 너비만큼만 밑줄 표시 */
+  }
+
   .logo-animation {
-    right: auto; /* 오른쪽 설정 제거 */
-    left: 50%; /* 가운데 정렬을 위해 */
-    transform: translate(-50%, -50%); /* 가운데 정렬 */
-    width: 150px;
-    height: 150px;
-    opacity: 0.8;
+    right: auto; /* 오른쪽 위치 설정 제거 */
+    left: 50%; /* 가로 중앙으로 이동 */
+    transform: translate(-50%, -50%); /* 가로, 세로 중앙 정렬 */
+    width: 160px; /* 애니메이션 영역 축소 */
+    height: 160px; /* 애니메이션 영역 축소 */
+    opacity: 0.8; /* 살짝 더 선명하게 */
   }
 }

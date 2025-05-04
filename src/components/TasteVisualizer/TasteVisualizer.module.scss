@@ -1,91 +1,150 @@
+/* 
+  CSS 변수: 자주 사용하는 값(색상, 크기 등)을 한 곳에 모아 관리.
+  예: '--margin-standard'라는 이름을 정하고, 이 값을 여러 곳에서 재사용.
+  이렇게 하면 나중에 색상이나 크기를 바꾸고 싶을 때 한 곳만 수정하면 됨.
+*/
+:root {
+  --margin-standard: 1.5rem; /* 요소 간 기본 여백 크기 */
+  --gap-standard: 1.5rem; /* 요소 사이 간격 */
+  --font-primary: 'Noto Sans KR', sans-serif; /* 기본 글꼴: 깔끔한 한국어 폰트 */
+  --color-dark: #333; /* 짙은 회색: 제목 같은 중요한 텍스트에 사용 */
+  --color-muted: #666; /* 연한 회색: 설명 텍스트에 사용 */
+  --shadow-subtle: 0 4px 12px rgba(0, 0, 0, 0.08); /* 부드러운 그림자 효과 */
+  --transition-ease: 0.5s ease; /* 애니메이션 부드럽게 움직이는 속도 */
+  --border-radius: 8px; /* 요소의 모서리를 둥글게 만드는 크기 */
+}
+
+/* 
+  시각화 컨테이너: 전체 콘텐츠를 감싸는 박스.
+  이 박스는 웹페이지에서 콘텐츠가 위아래로 적당한 여백을 가지도록 설정.
+*/
 .visualizerContainer {
-  margin: 1.5rem 0;
-  width: 100%;
+  margin: var(--margin-standard) 0; /* 위아래 여백을 1.5rem으로 설정 */
+  width: 100%; /* 박스가 페이지 전체 너비를 차지하도록 */
 }
 
+/* 
+  요소 컨테이너: 여러 항목(카드 같은 것)을 나란히 배치하는 박스.
+  항목들이 화면 크기에 따라 자동으로 줄 바꿈되도록 설정.
+*/
 .elementsContainer {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: center;
+  display: flex; /* 항목들을 가로로 나란히 배열 */
+  flex-wrap: wrap; /* 화면이 좁아지면 항목들이 아래로 내려가도록 */
+  gap: var(--gap-standard); /* 항목 사이의 간격을 1.5rem으로 */
+  justify-content: center; /* 항목들을 가운데 정렬 */
 }
 
+/* 
+  요소 항목: 각각의 카드(이미지와 설명이 포함된 박스).
+  처음에는 보이지 않다가 애니메이션으로 나타나도록 설정.
+*/
 .elementItem {
-  display: flex;
-  flex-direction: column;
-  width: 180px;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  
-  &.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  display: flex; /* 내부 콘텐츠를 세로로 쌓이도록 */
+  flex-direction: column; /* 콘텐츠가 위에서 아래로 배치 */
+  width: 180px; /* 각 카드의 너비 */
+  opacity: 0; /* 처음에는 투명(안 보임) */
+  transform: translateY(20px); /* 처음에 아래로 20px 내려가 있음 */
+  transition: opacity var(--transition-ease), transform var(--transition-ease); /* 부드럽게 나타나는 애니메이션 */
 }
 
+/* 
+  visible 클래스: 요소가 화면에 보일 때 적용.
+  투명도를 1로 바꾸고, 원래 위치로 이동.
+*/
+.elementItem.visible {
+  opacity: 1; /* 완전히 보이게 */
+  transform: translateY(0); /* 원래 위치로 이동 */
+}
+
+/* 
+  이미지 컨테이너: 카드 상단의 이미지를 담는 박스.
+  이미지가 너무 크면 잘리지 않도록 설정.
+*/
 .imageContainer {
-  width: 100%;
-  height: 180px;
-  overflow: hidden;
-  border-radius: 8px;
-  margin-bottom: 0.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  width: 100%; /* 카드 너비에 맞게 */
+  height: 180px; /* 이미지 높이 고정 */
+  overflow: hidden; /* 이미지가 박스를 벗어나면 잘림 */
+  border-radius: var(--border-radius); /* 모서리를 둥글게 */
+  margin-bottom: 0.5rem; /* 이미지와 아래 텍스트 사이 여백 */
+  box-shadow: var(--shadow-subtle); /* 부드러운 그림자 추가 */
 }
 
+/* 
+  요소 이미지: 카드에 들어가는 실제 이미지.
+  마우스를 올리면 살짝 커지는 효과 추가.
+*/
 .elementImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-  
-  &:hover {
-    transform: scale(1.05);
-  }
+  width: 100%; /* 이미지가 박스 너비를 꽉 채움 */
+  height: 100%; /* 박스 높이에 맞춤 */
+  object-fit: cover; /* 이미지가 박스에 꽉 차도록, 비율 유지하며 잘림 */
+  transition: transform 0.3s ease; /* 마우스 올릴 때 부드럽게 커짐 */
 }
 
+.elementImage:hover {
+  transform: scale(1.05); /* 마우스를 올리면 이미지 5% 확대 */
+}
+
+/* 
+  요소 정보: 이미지 아래의 텍스트(이름, 설명)를 담는 부분.
+*/
 .elementInfo {
-  padding: 0.5rem 0;
+  padding: 0.5rem 0; /* 위아래 약간의 여백 추가 */
 }
 
+/* 
+  요소 이름: 카드의 제목 텍스트.
+  굵고 눈에 띄게 설정.
+*/
 .elementName {
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 0 0 0.25rem 0;
-  color: #333;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 1rem; /* 글자 크기 적당히 */
+  font-weight: 600; /* 글자 두껍게 */
+  margin: 0 0 0.25rem 0; /* 아래쪽에만 살짝 여백 */
+  color: var(--color-dark); /* 짙은 회색으로 */
+  font-family: var(--font-primary); /* 깔끔한 글꼴 사용 */
 }
 
+/* 
+  요소 설명: 카드의 부가 설명 텍스트.
+  작고 연한 색상으로 덜 두드러지게.
+*/
 .elementDescription {
-  font-size: 0.85rem;
-  color: #666;
-  margin: 0;
-  line-height: 1.4;
-  font-family: 'Noto Sans KR', sans-serif;
-  word-break: keep-all;
+  font-size: 0.85rem; /* 제목보다 작은 글자 */
+  color: var(--color-muted); /* 연한 회색 */
+  margin: 0; /* 여백 없음 */
+  line-height: 1.4; /* 줄 간격으로 읽기 편하게 */
+  font-family: var(--font-primary); /* 동일한 글꼴 */
+  word-break: keep-all; /* 한국어 단어가 어색하게 끊기지 않도록 */
 }
 
+/* 
+  반응형 디자인: 화면이 768px 이하일 때(모바일 등) 스타일 조정.
+  작은 화면에 맞게 크기와 간격을 줄임.
+*/
 @media (max-width: 768px) {
   .elementsContainer {
-    gap: 1rem;
+    gap: 1rem; /* 카드 사이 간격을 더 좁게 */
   }
-  
+
   .elementItem {
-    width: 140px;
+    width: 140px; /* 카드 너비 축소 */
   }
-  
+
   .imageContainer {
-    height: 140px;
+    height: 140px; /* 이미지 높이 축소 */
   }
 }
 
+/* 
+  애니메이션: 요소가 화면에 나타날 때 부드럽게 올라오는 효과.
+  이름은 'fadeIn'으로, 투명에서 선명하게, 아래에서 위로 이동.
+*/
 @keyframes fadeIn {
   from {
-    opacity: 0;
-    transform: translateY(20px);
+    opacity: 0; /* 시작: 투명 */
+    transform: translateY(20px); /* 시작: 아래로 20px */
   }
   to {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1; /* 끝: 완전히 보임 */
+    transform: translateY(0); /* 끝: 원래 위치 */
   }
 }

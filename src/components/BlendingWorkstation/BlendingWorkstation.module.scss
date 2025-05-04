@@ -1,8 +1,7 @@
 .blendingWorkstation {
   position: relative;
-  background-color: #f8f4f0;
+  background-color: #FFFFFF;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   padding: 20px;
   max-width: 800px;
   margin: 0 auto;
@@ -10,8 +9,10 @@
   h2 {
     text-align: center;
     margin-bottom: 20px;
-    color: #432a2a;
+    color: #080808;
     font-size: 1.8rem;
+    font-family: 'Univers Next Pro', sans-serif;
+    font-weight: 400;
   }
 }
 
@@ -22,7 +23,7 @@
   background: none;
   border: none;
   font-size: 1.5rem;
-  color: #666;
+  color: #080808;
   cursor: pointer;
   
   &:hover {
@@ -30,180 +31,157 @@
   }
 }
 
-.beanSelectionArea {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 15px;
-  margin-bottom: 20px;
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
-.beanCard {
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-  position: relative;
-  overflow: hidden;
-  
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  &.selected {
-    border: 2px solid #8c6035;
-  }
-  
-  h4 {
-    margin: 0 0 8px;
-    color: #432a2a;
-  }
-  
-  p {
-    margin: 0;
-    font-size: 0.9rem;
-    color: #666;
-  }
-  
-  .roastLevel {
-    display: inline-block;
-    padding: 3px 6px;
-    border-radius: 4px;
-    font-size: 0.7rem;
-    font-weight: bold;
-    margin-top: 8px;
-    
-    &.light {
-      background-color: #e9d8c0;
-      color: #6b5035;
-    }
-    
-    &.medium {
-      background-color: #d3aa74;
-      color: #fff;
-    }
-    
-    &.mediumDark {
-      background-color: #a67c52;
-      color: #fff;
-    }
-    
-    &.dark {
-      background-color: #5e412f;
-      color: #fff;
-    }
-  }
+.coffeeMachineImage {
+  width: 100%;
+  max-width: 530px;
+  margin: 0 auto;
+  display: block;
 }
 
-.blendingArea {
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 20px;
-  margin-top: 20px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+.workstationLayout {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
 }
 
 .selectedBeansSection {
-  margin-bottom: 20px;
-  
-  h3 {
-    font-size: 1.2rem;
-    color: #432a2a;
-    margin-bottom: 10px;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .selectedBeansList {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 24px;
 }
 
 .selectedBeanItem {
   display: flex;
   align-items: center;
-  background-color: #f8f4f0;
-  border-radius: 6px;
-  padding: 8px 12px;
+  justify-content: space-between;
+  background-color: #FFD700;
+  border-radius: 30px;
+  padding: 24px;
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 455px;
   
   .beanInfo {
-    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
     
     h4 {
       margin: 0;
-      font-size: 1rem;
+      font-size: 18px;
+      font-family: 'Univers Next Pro', sans-serif;
+      font-weight: 500;
+      color: #080808;
     }
     
     p {
-      margin: 3px 0 0;
-      font-size: 0.8rem;
-      color: #666;
+      margin: 0;
+      font-size: 16px;
+      font-family: 'Univers Next Pro', sans-serif;
+      font-weight: 400;
+      color: #888888;
     }
   }
   
   .ratioControl {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
     
     button {
-      background-color: #e4d6c9;
+      background-color: #B09EFF;
       border: none;
       border-radius: 4px;
-      width: 25px;
-      height: 25px;
+      width: 24px;
+      height: 24px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: bold;
       cursor: pointer;
-      transition: background-color 0.2s;
+      color: #000000;
       
       &:hover {
-        background-color: #d3aa74;
-        color: white;
+        opacity: 0.9;
       }
     }
     
     span {
-      width: 35px;
+      font-family: 'Univers Next Pro', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      color: #000000;
       text-align: center;
-      font-weight: bold;
-    }
-  }
-  
-  .removeButton {
-    background: none;
-    border: none;
-    color: #8c6035;
-    cursor: pointer;
-    margin-left: 10px;
-    
-    &:hover {
-      color: #5e3920;
     }
   }
 }
 
-.createBlendSection {
-  margin-top: 25px;
-  text-align: center;
+.ratioContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 97px;
+  margin-top: 20px;
   
-  button {
-    background-color: #8c6035;
-    color: white;
+  p {
+    margin: 0;
+    font-size: 16px;
+    font-family: 'Univers Next Pro', sans-serif;
+    font-weight: 400;
+    color: #888888;
+  }
+  
+  .adjustButton {
+    background-color: #080808;
+    color: #FFFFFF;
     border: none;
-    border-radius: 6px;
-    padding: 12px 24px;
-    font-size: 1rem;
-    font-weight: bold;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 16px;
+    font-family: 'Univers Next Pro', sans-serif;
+    font-weight: 400;
     cursor: pointer;
-    transition: background-color 0.2s;
     
     &:hover {
-      background-color: #5e3920;
+      opacity: 0.9;
+    }
+  }
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24px;
+  
+  .blendButton {
+    background-color: #B09EFF;
+    color: #080808;
+    border: none;
+    border-radius: 16px;
+    padding: 16px;
+    font-size: 24px;
+    font-family: 'Univers Next Pro', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: -0.04em;
+    
+    &:hover {
+      opacity: 0.9;
     }
     
     &:disabled {
@@ -213,22 +191,80 @@
   }
 }
 
-.noBeansSelected {
-  text-align: center;
-  padding: 20px;
-  color: #666;
-  font-style: italic;
+.resetButtonContainer {
+  display: flex;
+  justify-content: center;
+  padding: 0 14px;
 }
 
-.totalRatio {
-  text-align: right;
-  margin-top: 10px;
-  font-size: 0.9rem;
-  color: #666;
+.resetButton {
+  background-color: transparent;
+  color: #080808;
+  border: 2px solid #B09EFF;
+  border-radius: 16px;
+  padding: 16px;
+  font-size: 24px;
+  font-family: 'Univers Next Pro', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
   
-  &.error {
-    color: #e74c3c;
-    font-weight: bold;
+  &:hover {
+    background-color: rgba(176, 158, 255, 0.1);
+  }
+}
+
+.beanSelectionArea {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  padding: 0 14px;
+  margin-top: 24px;
+}
+
+.beanCard {
+  width: 190px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  
+  &:hover {
+    transform: translateY(-3px);
+  }
+  
+  &.selected {
+    border: 2px solid #B09EFF;
+  }
+  
+  .beanImage {
+    width: 100%;
+    height: 120px;
+    background-color: #D9D9D9;
+    border-radius: 4px;
+  }
+  
+  .beanInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    
+    h4 {
+      margin: 0;
+      font-size: 18px;
+      font-family: 'Univers Next Pro', sans-serif;
+      font-weight: 500;
+      color: #080808;
+    }
+    
+    p {
+      margin: 0;
+      font-size: 16px;
+      font-family: 'Univers Next Pro', sans-serif;
+      font-weight: 400;
+      color: #080808;
+    }
   }
 }
 

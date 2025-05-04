@@ -13,11 +13,10 @@ import {
 import { getBlendingTips } from '../../data/blendData';
 import coffeeBeans from '../../data/coffeeData';
 import TasteVisualizer from '../TasteVisualizer';
-import MemoStyleNotes from '../MemoStyleNotes';
 import styles from './BlendResult.module.scss';
 
 const BlendResult: React.FC = () => {
-  const [blendResult, setBlendResult] = useAtom(blendResultAtom);
+  const [blendResult] = useAtom(blendResultAtom);
   const [, setShowBlendResult] = useAtom(showBlendResultAtom);
   const [blendAnimationState, setBlendAnimationState] = useAtom(blendAnimationStateAtom);
   const [savedBlends, setSavedBlends] = useAtom(savedBlendsAtom);
@@ -191,11 +190,7 @@ const BlendResult: React.FC = () => {
             </div>
           </div>
           
-          {/* 메모 스타일 노트 */}
-          <div className={styles.memoSection}>
-            <MemoStyleNotes memoText={blendResult.memoStyle} />
-          </div>
-          
+        
           {/* 블렌드 구성 요소 */}
           <div className={styles.componentsSection}>
             <h4>블렌드 구성</h4>
