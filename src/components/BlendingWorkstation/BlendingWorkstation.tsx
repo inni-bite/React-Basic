@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useAtom } from 'jotai';
+import React, { useState } from 'react';
+import { useAtom, useSetAtom } from 'jotai';
 import { 
   blendingComponentsAtom, 
   showBlendingWorkstationAtom, 
@@ -14,10 +14,10 @@ import styles from './BlendingWorkstation.module.scss';
 
 const BlendingWorkstation: React.FC = () => {
   const [blendingComponents, setBlendingComponents] = useAtom(blendingComponentsAtom);
-  const [, setShowBlendingWorkstation] = useAtom(showBlendingWorkstationAtom);
-  const [, setShowBlendResult] = useAtom(showBlendResultAtom);
-  const [, setBlendResult] = useAtom(blendResultAtom);
-  const [, setBlendAnimationState] = useAtom(blendAnimationStateAtom);
+  const setShowBlendingWorkstation = useSetAtom(showBlendingWorkstationAtom);
+  const setShowBlendResult = useSetAtom(showBlendResultAtom);
+  const setBlendResult = useSetAtom(blendResultAtom);
+  const setBlendAnimationState = useSetAtom(blendAnimationStateAtom);
   
   // 선택된 원두 ID 목록 (UI 관리용)
   const [selectedBeanIds, setSelectedBeanIds] = useState<string[]>([]);
@@ -74,12 +74,6 @@ const BlendingWorkstation: React.FC = () => {
     setBlendingComponents(newComponents);
   };
   
-  // 원두 제거 핸들러
-  const handleRemoveBean = (beanId: string) => {
-    setSelectedBeanIds(selectedBeanIds.filter(id => id !== beanId));
-    setBlendingComponents(blendingComponents.filter(comp => comp.beanId !== beanId));
-  };
-  
   // 블렌드 생성 핸들러
   const handleCreateBlend = () => {
     if (!isRatioValid || blendingComponents.length === 0) return;
@@ -128,11 +122,6 @@ const BlendingWorkstation: React.FC = () => {
     }, 2000); // 2초 지연 (가챠 효과)
   };
   
-  // 작업 취소 및 창 닫기
-  const handleClose = () => {
-    setShowBlendingWorkstation(false);
-  };
-  
   // 비율 자동 조정 (100%에 맞추기)
   const adjustRatiosTo100 = () => {
     if (blendingComponents.length === 0) return;
@@ -174,12 +163,26 @@ const BlendingWorkstation: React.FC = () => {
   // 비율이 100%가 아닐 때 자동 조정 버튼 표시 여부
   const showAdjustButton = totalRatio !== 100 && blendingComponents.length > 0;
   
+  // 원두 제거 핸들러
+  const handleRemoveBean = (beanId: string) => {
+    setSelectedBeanIds(selectedBeanIds.filter(id => id !== beanId));
+    setBlendingComponents(blendingComponents.filter(comp => comp.beanId !== beanId));
+  };
+  
+  // 작업 취소 및 창 닫기
+  const handleClose = () => {
+    setShowBlendingWorkstation(false);
+  };
+  
   return (
     <div className={styles.blendingWorkstation}>
       <div className={styles.container}>
         <div className={styles.resetButtonContainer}>
           <button className={styles.resetButton} onClick={handleReset}>
             Reset
+          </button>
+          <button className={styles.closeButton} onClick={handleClose}>
+            Close
           </button>
         </div>
         
@@ -203,6 +206,7 @@ const BlendingWorkstation: React.FC = () => {
                       <button onClick={() => handleRatioChange(comp.beanId, -5)}>-</button>
                       <span>{comp.ratio}%</span>
                       <button onClick={() => handleRatioChange(comp.beanId, 5)}>+</button>
+                      <button onClick={() => handleRemoveBean(comp.beanId)}>Remove</button>
                     </div>
                   </div>
                 );

@@ -47,11 +47,6 @@ function App() {
     }, 3000);
   };
   
-  // 뒤로가기 핸들러
-  const handleGoBack = () => {
-    setActiveTab(-1); // 랜딩 페이지로 돌아가기
-  };
-  
   return (
     <div className={`app ${activeTab === 0 ? 'coffee-bean-view' : ''}`}>
       {activeTab === -1 ? (

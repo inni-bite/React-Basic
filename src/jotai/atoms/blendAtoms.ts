@@ -11,7 +11,12 @@ export const showBlendingWorkstationAtom = atom<boolean>(false);
 export const showBlendResultAtom = atom<boolean>(false);
 
 // 블렌딩 결과
-export const blendResultAtom = atom<CoffeeBlend | null>(null);
+export const blendResultAtom = atom<CoffeeBlend | null, [CoffeeBlend | null], void>(
+  (_get) => _get(blendResultAtom), // 읽기 getter (기본값 null)
+  (_get, set, newValue: CoffeeBlend | null) => {
+    set(blendResultAtom, newValue); // 쓰기 setter
+  }
+);
 
 // 저장된 블렌드 목록
 export const savedBlendsAtom = atom<CoffeeBlend[]>([]);

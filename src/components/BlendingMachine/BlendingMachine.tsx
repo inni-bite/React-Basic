@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useAtom } from 'jotai';
 import { showBlendingWorkstationAtom } from '../../jotai/atoms/blendAtoms';
 import BlendingWorkstation from '../BlendingWorkstation/BlendingWorkstation';
