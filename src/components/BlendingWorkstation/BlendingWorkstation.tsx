@@ -5,22 +5,36 @@ import {
   showBlendingWorkstationAtom, 
   showBlendResultAtom,
   blendResultAtom,
-  blendAnimationStateAtom
+  blendAnimationStateAtom,
+  isBlendedAtom,
+  selectedBeanIdsAtom
 } from '../../jotai/atoms/blendAtoms';
 import { CoffeeBean } from '../../data/coffeeData';
 import { calculateBlendProfile } from '../../data/blendData';
 import coffeeBeans from '../../data/coffeeData';
+import CoffeeImage from '../CoffeeImage/CoffeeImage';
 import styles from './BlendingWorkstation.module.scss';
 
-const BlendingWorkstation: React.FC = () => {
+interface BlendingWorkstationProps {
+  showSelectionOnly?: boolean;
+  showBeanSelection?: boolean;
+  showBeanSelectionOnly?: boolean;
+}
+
+const BlendingWorkstation: React.FC<BlendingWorkstationProps> = ({
+  showSelectionOnly = false, 
+  showBeanSelection = false,
+  showBeanSelectionOnly = false
+}) => {
   const [blendingComponents, setBlendingComponents] = useAtom(blendingComponentsAtom);
   const setShowBlendingWorkstation = useSetAtom(showBlendingWorkstationAtom);
   const setShowBlendResult = useSetAtom(showBlendResultAtom);
   const setBlendResult = useSetAtom(blendResultAtom);
   const setBlendAnimationState = useSetAtom(blendAnimationStateAtom);
+  const [, setIsBlended] = useAtom(isBlendedAtom);
   
   // 선택된 원두 ID 목록 (UI 관리용)
-  const [selectedBeanIds, setSelectedBeanIds] = useState<string[]>([]);
+  const [selectedBeanIds, setSelectedBeanIds] = useAtom(selectedBeanIdsAtom);
   
   // 총 비율 계산
   const totalRatio = blendingComponents.reduce((sum, comp) => sum + comp.ratio, 0);
@@ -77,6 +91,9 @@ const BlendingWorkstation: React.FC = () => {
   // 블렌드 생성 핸들러
   const handleCreateBlend = () => {
     if (!isRatioValid || blendingComponents.length === 0) return;
+    
+    // 블렌드 이미지 변경
+    setIsBlended(true);
     
     // 블렌딩 애니메이션 시작
     setBlendAnimationState('processing');
@@ -169,6 +186,109 @@ const BlendingWorkstation: React.FC = () => {
     setBlendingComponents(blendingComponents.filter(comp => comp.beanId !== beanId));
   };
   
+  // 선택된 원두 표시 부분만 렌더링하는 함수
+  const renderSelectedBeans = () => (
+    <div className={styles.selectedBeansSection}>
+      {blendingComponents.length > 0 && (
+        <div className={styles.selectedBeansList}>
+          {blendingComponents.map(comp => {
+            const bean = coffeeBeans.find(b => b.id === comp.beanId);
+            if (!bean) return null;
+            
+            return (
+              <div key={comp.beanId} className={styles.selectedBeanItem}>
+                <div className={styles.beanInfo}>
+                  <h4>{bean?.name}</h4>
+                  <p>{bean?.origin}</p>
+                  <p>{bean?.roastLevel.charAt(0).toUpperCase() + bean?.roastLevel.slice(1)} Roast</p>
+                  <p>{bean?.flavor.join(', ')}</p>
+                </div>
+                
+                <div className={styles.ratioControl}>
+                  <button onClick={() => handleRatioChange(comp.beanId, -5)}>-</button>
+                  <span>{comp.ratio}%</span>
+                  <button onClick={() => handleRatioChange(comp.beanId, 5)}>+</button>
+                  <button className={styles.removeButton} onClick={() => handleRemoveBean(comp.beanId)}>Remove</button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+      
+      {/* 총 비율 및 자동 조정 버튼 */}
+      {blendingComponents.length > 0 && (
+        <div className={styles.ratioContainer}>
+          <p>총 비율 : {totalRatio}% (100%가 되어야 합니다)</p>
+          {showAdjustButton && (
+            <button className={styles.adjustButton} onClick={adjustRatiosTo100}>
+              자동 조정
+            </button>
+          )}
+        </div>
+      )}
+      
+      {/* 블렌드 버튼 */}
+      <div className={styles.actionButtons}>
+        <button 
+          className={styles.blendButton}
+          disabled={!isRatioValid || blendingComponents.length === 0}
+          onClick={handleCreateBlend}
+        >
+          Blend
+        </button>
+      </div>
+    </div>
+  );
+  
+  // 원두 선택 영역만 렌더링하는 함수
+  const renderBeanSelection = () => (
+    <div className={styles.beanSelectionArea}>
+      {coffeeBeans.map(bean => (
+        <div
+          key={bean.id}
+          className={`${styles.beanCard} ${selectedBeanIds.includes(bean.id) ? styles.selected : ''}`}
+          onClick={() => handleBeanSelect(bean)}
+        >
+          <div className={styles.beanImage}>
+            <CoffeeImage src={`/images/coffee-beans/${bean.id}.jpg`} alt={bean.name} />
+          </div>
+          <div className={styles.beanInfo}>
+            <h4>{bean.name}</h4>
+            <p>{bean.origin}</p>
+            <p>{bean.roastLevel.charAt(0).toUpperCase() + bean.roastLevel.slice(1)} Roast</p>
+            <p>{bean.flavor.join(', ')}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+  
+  // props에 따라 다른 컴포넌트 렌더링
+  if (showSelectionOnly) {
+    return (
+      <div className={`${styles.blendingWorkstation} ${styles.selectionOnly}`}>
+        {renderSelectedBeans()}
+      </div>
+    );
+  }
+  
+  if (showBeanSelection || showBeanSelectionOnly) {
+    return (
+      <div className={`${styles.blendingWorkstation} ${styles.beanSelectionOnly}`}>
+        {!showBeanSelectionOnly && (
+          <div className={styles.resetButtonContainer}>
+            <button className={styles.resetButton} onClick={handleReset}>
+              Reset
+            </button>
+          </div>
+        )}
+        {renderBeanSelection()}
+      </div>
+    );
+  }
+  
+  // 기본 렌더링 (두 조건 모두 false일 때)
   return (
     <div className={styles.blendingWorkstation}>
       <div className={styles.container}>
@@ -188,17 +308,17 @@ const BlendingWorkstation: React.FC = () => {
                 return (
                   <div key={comp.beanId} className={styles.selectedBeanItem}>
                     <div className={styles.beanInfo}>
-                      <h4>{bean.name}</h4>
-                      <p>{bean.origin}</p>
-                      <p>{bean.roastLevel.charAt(0).toUpperCase() + bean.roastLevel.slice(1)} Roast</p>
-                      <p>{bean.flavor.join(', ')}</p>
+                      <h4>{bean?.name}</h4>
+                      <p>{bean?.origin}</p>
+                      <p>{bean?.roastLevel.charAt(0).toUpperCase() + bean?.roastLevel.slice(1)} Roast</p>
+                      <p>{bean?.flavor.join(', ')}</p>
                     </div>
                     
                     <div className={styles.ratioControl}>
                       <button onClick={() => handleRatioChange(comp.beanId, -5)}>-</button>
                       <span>{comp.ratio}%</span>
                       <button onClick={() => handleRatioChange(comp.beanId, 5)}>+</button>
-                      <button onClick={() => handleRemoveBean(comp.beanId)}>Remove</button>
+                      <button className={styles.removeButton} onClick={() => handleRemoveBean(comp.beanId)}>Remove</button>
                     </div>
                   </div>
                 );
@@ -238,13 +358,14 @@ const BlendingWorkstation: React.FC = () => {
               className={`${styles.beanCard} ${selectedBeanIds.includes(bean.id) ? styles.selected : ''}`}
               onClick={() => handleBeanSelect(bean)}
             >
-              <div className={styles.beanImage}></div>
-              <div className={styles.beanInfo}>
-                <h4>{bean.name}</h4>
-                <p>{bean.origin}</p>
-                <p>{bean.roastLevel.charAt(0).toUpperCase() + bean.roastLevel.slice(1)} Roast</p>
-                <p>{bean.flavor.join(', ')}</p>
+              <div className={styles.beanImage}>
+                <CoffeeImage src={`/images/coffee-beans/${bean.id}.jpg`} alt={bean.name} />
               </div>
+              <div className={styles.beanInfo}>
+              <h4>{bean.name}</h4>
+                <p>{bean.origin}</p>
+            <p>{bean.roastLevel.charAt(0).toUpperCase() + bean.roastLevel.slice(1)} Roast</p>
+          </div>
             </div>
           ))}
         </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { showBlendingWorkstationAtom } from '../../jotai/atoms/blendAtoms';
+import { showBlendingWorkstationAtom, isBlendedAtom } from '../../jotai/atoms/blendAtoms';
 import BlendingWorkstation from '../BlendingWorkstation/BlendingWorkstation';
 import styles from './BlendingMachine.module.scss';
 
@@ -10,6 +10,7 @@ interface BlendingMachineProps {
 
 const BlendingMachine: React.FC<BlendingMachineProps> = ({ onBlend }) => {
   const [showBlendingWorkstation, setShowBlendingWorkstation] = useAtom(showBlendingWorkstationAtom);
+  const [isBlended, setIsBlended] = useAtom(isBlendedAtom);
   
   // 로고 클릭 핸들러
   const handleLogoClick = () => {
@@ -24,21 +25,26 @@ const BlendingMachine: React.FC<BlendingMachineProps> = ({ onBlend }) => {
     }
   };
   
+  // 블렌드 버튼 클릭 핸들러
+  const handleBlendClick = () => {
+    setIsBlended(true); // 이미지만 변경
+  };
+  
   return (
     <div className={styles.blendingMachineContainer}>
       {/* 헤더: 로고 표시 */}
-      <div className={styles.coffeeBeanHeader}>
+      <header className={styles.coffeeBeanHeader}>
         <div className={styles.logo} onClick={handleLogoClick}>
           <h1 className={styles.clickableLogo}>Coffee2</h1>
         </div>
-      </div>
+      </header>
       
       <div className={styles.mainContent}>
         <div className={styles.leftSection}>
           <div className={styles.blendSection}>
             <div className={styles.blendingMachine}>
               <img 
-                src="/before-blend.jpeg" 
+                src={isBlended ? "/after-blend.jpeg" : "/before-blend.jpeg"} 
                 alt="Coffee Machine" 
                 className={styles.coffeeMachineImage} 
               />
@@ -52,12 +58,18 @@ const BlendingMachine: React.FC<BlendingMachineProps> = ({ onBlend }) => {
                 Create Coffee
               </button>
             )}
+            
+            {showBlendingWorkstation && (
+              <div className={styles.selectedBeansContainer}>
+                <BlendingWorkstation showSelectionOnly={true} />
+              </div>
+            )}
           </div>
         </div>
         
         {showBlendingWorkstation && (
           <div className={styles.rightSection}>
-            <BlendingWorkstation />
+            <BlendingWorkstation showBeanSelectionOnly={true} />
           </div>
         )}
       </div>
@@ -74,7 +86,7 @@ const BlendingMachine: React.FC<BlendingMachineProps> = ({ onBlend }) => {
           </div>
         </button>
 
-        <button className={`${styles.navButton} ${styles.active}`}>
+        <button className={`${styles.navButton} ${styles.active}`} onClick={handleBlendClick}>
           Blend
           <div className={styles.arrowIcon}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
