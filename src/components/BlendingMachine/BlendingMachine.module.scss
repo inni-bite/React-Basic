@@ -1,260 +1,308 @@
+/*
+  BlendingMachine 컴포넌트의 전체 스타일을 정의합니다.
+  이 스타일은 커피 블렌딩 머신 페이지의 레이아웃과 디자인을 담당합니다.
+  헤더, 메인 콘텐츠 영역, 푸터 등의 스타일이 포함됩니다.
+*/
 .blendingMachineContainer {
-  background-color: #FFFFFF;
-  min-height: 100vh;
-  width: 100%;
-  padding: 24px;
-  position: relative;
-  padding-bottom: 180px; /* 푸터와의 여백 */
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
+  background-color: #FFFFFF; /* 배경색을 흰색으로 설정합니다. */
+  min-height: 100vh; /* 최소 높이를 화면 전체 높이로 설정하여 내용이 적어도 화면을 채우도록 합니다. */
+  width: 100%; /* 가로 폭을 부모 요소에 꽉 채웁니다. */
+  padding: 24px; /* 내부 여백을 24px로 설정합니다. */
+  position: relative; /* 자식 요소의 절대 위치 설정을 위한 기준점을 만듭니다. */
+  padding-bottom: 180px; /* 아래쪽에 180px의 여백을 두어 푸터가 가리지 않도록 합니다. */
+  overflow-y: auto; /* 내용이 넘칠 경우 세로 스크롤바를 표시합니다. */
+  display: flex; /* 자식 요소들을 유연하게 배치합니다. */
+  flex-direction: column; /* 자식 요소들을 세로 방향으로 나열합니다. */
 }
 
+/* 선택된 원두 목록을 담는 컨테이너 스타일 */
 .selectedBeansContainer {
-  width: 100%;
-  margin-top: 30px;
-  max-width: 530px; /* 커피머신 이미지 너비와 동일 */
+  width: 100%; /* 가로 폭을 부모 요소에 꽉 채웁니다. */
+  margin-top: 0px; /* 위쪽 마진을 30px 둡니다. */
+  max-width: 646px; /* 최대 가로 너비를 530px로 제한합니다 (커피 머신 이미지 너비와 동일하게 맞춘 것으로 보입니다). */
 }
 
+/* 페이지 상단의 헤더 스타일 */
 .coffeeBeanHeader {
-  display: flex;
-  align-items: center;
-  padding: 16px 48px;
-  width: 100%;
-  position: relative;
-  background-color: #FFFFFF;
-  z-index: 100;
-  justify-content: flex-start; /* LandingPage의 헤더와 동일 */
-  border-bottom: 1px solid #EFEFEF;
+  display: flex; /* 자식 요소들을 유연하게 배치합니다. */
+  align-items: center; /* 자식 요소들을 세로 중앙에 정렬합니다. */
+  padding: 16px 0px; /* 위아래 패딩 16px, 좌우 패딩 48px */
+  width: 100%; /* 가로 폭을 부모 요소에 꽉 채웁니다. */
+  position: relative; /* 자식 요소의 절대 위치 설정을 위한 기준점을 만듭니다. */
+  background-color: #FFFFFF; /* 배경색을 흰색으로 설정합니다. */
+  z-index: 100; /* 다른 요소들 위에 표시되도록 z-index를 높게 설정합니다. */
+  justify-content: flex-start; /* 자식 요소들을 컨테이너의 시작점(왼쪽)에 정렬합니다. */
+  border-bottom: 1px solid #EFEFEF; /* 아래쪽에 얇은 회색 테두리를 추가합니다. */
 }
 
+/* 로고 영역 스타일 (클릭 가능) */
 .logo {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
+  display: flex; /* 자식 요소들을 유연하게 배치합니다. */
+  align-items: center; /* 자식 요소들을 세로 중앙에 정렬합니다. */
+  cursor: pointer; /* 마우스 커서를 올렸을 때 손가락 모양으로 변경합니다. */
 }
 
+/* 클릭 가능한 로고 텍스트 스타일 */
 .clickableLogo {
-  font-size: 28px;
-  font-weight: 400;
-  letter-spacing: -0.04em;
-  margin: 0;
-  color: #080808;
-  font-family: 'Univers Next Pro', sans-serif;
-  position: relative;
-  display: inline-block;
-  
+  font-size: 28px; /* 글자 크기 28px */
+  font-weight: 400; /* 글자 두께 보통 */
+  letter-spacing: -0.04em; /* 글자 간격을 살짝 좁게 설정합니다. */
+  margin: 0; /* 기본 마진 제거 */
+  color: #080808; /* 글자색을 거의 검은색으로 설정합니다. */
+  font-family: 'Univers Next Pro', sans-serif; /* 폰트 설정 */
+  position: relative; /* 가상 요소 (::after)의 위치 설정을 위한 기준점을 만듭니다. */
+  display: inline-block; /* 텍스트 너비만큼만 영역을 차지하도록 설정합니다. */
+
+  /* 로고 텍스트 아래에 나타나는 밑줄 스타일 (초기 상태) */
   &::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background-color: #080808;
-    transition: width 0.3s;
+    content: ''; /* 가상 요소로 사용될 빈 콘텐츠를 만듭니다. */
+    position: absolute; /* 부모 요소 (.clickableLogo)를 기준으로 위치를 설정합니다. */
+    bottom: -2px; /* 부모 요소의 아래쪽에서 2px 위에 위치합니다. */
+    left: 0; /* 부모 요소의 왼쪽 끝에 위치합니다. */
+    width: 0; /* 초기 너비를 0으로 설정하여 보이지 않게 합니다. */
+    height: 1px; /* 높이를 1px로 설정하여 얇은 선을 만듭니다. */
+    background-color: #080808; /* 배경색을 거의 검은색으로 설정합니다. */
+    transition: width 0.3s; /* 너비가 0.3초 동안 부드럽게 변하도록 설정합니다. */
   }
-  
+
+  /* 로고 텍스트에 마우스 커서를 올렸을 때 밑줄 스타일 */
   &:hover::after {
-    width: 100%;
+    width: 100%; /* 너비를 100%로 설정하여 밑줄이 나타나도록 합니다. */
   }
 }
 
+/* 페이지의 주요 콘텐츠 영역 스타일 */
 .mainContent {
-  flex: 1;
-  display: flex;
-  margin-top: 20px;
-  padding: 0 48px;
-  box-sizing: border-box;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-  max-width: 1366px;
-  justify-content: center;
-  gap: 80px; /* 좌측과 우측 섹션 사이 간격 */
+  flex: 1; /* 남은 공간을 모두 차지하도록 설정하여 푸터가 아래로 이동하게 합니다. */
+  display: flex; /* 자식 요소들을 유연하게 배치합니다. */
+  margin-top: 20px; /* 위쪽 마진을 20px 둡니다. */
+  padding: 0 48px; /* 위아래 패딩 0, 좌우 패딩 48px */
+  box-sizing: border-box; /* 패딩과 테두리를 너비 계산에 포함시킵니다. */
+  margin-left: auto; /* 왼쪽 마진을 자동으로 설정합니다. */
+  margin-right: auto; /* 오른쪽 마진을 자동으로 설정합니다. */
+  width: 100%; /* 가로 폭을 부모 요소에 꽉 채웁니다. */
+  max-width: 1366px; /* 최대 가로 너비를 1366px로 제한합니다. */
+  justify-content: center; /* 자식 요소들을 가로 중앙에 정렬합니다. */
+  gap: 80px; /* 좌측 섹션과 우측 섹션 사이에 80px의 간격을 둡니다. */
 }
 
+/* 메인 콘텐츠의 좌측 섹션 스타일 */
 .leftSection {
-  width: 600px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 30px;
+  width: 600px; /* 가로 너비를 600px로 설정합니다. */
+  display: flex; /* 자식 요소들을 유연하게 배치합니다. */
+  flex-direction: column; /* 자식 요소들을 세로 방향으로 나열합니다. */
+  align-items: center; /* 자식 요소들을 가로 중앙에 정렬합니다. */
+  justify-content: flex-start; /* 자식 요소들을 세로 시작점(위쪽)에 정렬합니다. */
+  gap: 30px; /* 자식 요소들 사이에 30px의 간격을 둡니다. */
 }
 
+/* 메인 콘텐츠의 우측 섹션 스타일 */
 .rightSection {
-  width: 670px;
+  width: 670px; /* 가로 너비를 670px로 설정합니다. */
 }
 
+/* 블렌딩 섹션 스타일 (커피 머신 이미지와 버튼 포함) */
 .blendSection {
-  width: 530px;
-  max-width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
+  width: 530px; /* 가로 너비를 530px로 설정합니다. */
+  max-width: 100%; /* 최대 가로 너비를 100%로 제한하여 작은 화면에서 넘치지 않도록 합니다. */
+  display: flex; /* 자식 요소들을 유연하게 배치합니다. */
+  flex-direction: column; /* 자식 요소들을 세로 방향으로 나열합니다. */
+  align-items: center; /* 자식 요소들을 가로 중앙에 정렬합니다. */
+  gap: 24px; /* 자식 요소들 사이에 24px의 간격을 둡니다. */
 }
 
+/* 블렌딩 머신 이미지 영역 스타일 (클릭 가능) */
 .blendingMachine {
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: transform 0.3s ease;
-  
+  cursor: pointer; /* 마우스 커서를 올렸을 때 손가락 모양으로 변경합니다. */
+  display: flex; /* 자식 요소들을 유연하게 배치합니다. */
+  justify-content: center; /* 자식 요소들을 가로 중앙에 정렬합니다. */
+  align-items: center; /* 자식 요소들을 세로 중앙에 정렬합니다. */
+  transition: transform 0.3s ease; /* transform 속성이 0.3초 동안 부드럽게 변하도록 설정합니다. */
+
+  /* 마우스 커서를 올렸을 때의 스타일 */
   &:hover {
-    transform: scale(1.02);
+    transform: scale(1.02); /* 이미지를 1.02배 살짝 확대합니다. */
   }
 }
 
+/* 커피 머신 이미지 자체의 스타일 */
 .coffeeMachineImage {
-  width: 100%;
-  max-width: 530px;
-  height: auto;
-  object-fit: contain;
+  width: 100%; /* 이미지를 부모 요소 너비에 꽉 채웁니다. */
+  max-width: 530px; /* 이미지의 최대 가로 너비를 530px로 제한합니다. */
+  height: auto; /* 세로 높이를 가로 비율에 맞게 자동 조절합니다. */
+  object-fit: contain; /* 이미지 비율을 유지하면서 컨테이너에 맞게 크기를 조절합니다. */
 }
 
+/* 'Create Coffee' 버튼 스타일 */
 .createCoffeeButton {
-  background-color: #B09EFF;
-  color: #080808;
-  border: none;
-  border-radius: 16px;
-  padding: 16px;
-  font-size: 24px;
-  font-family: 'Univers Next Pro', sans-serif;
-  font-weight: 600;
-  cursor: pointer;
-  letter-spacing: -0.04em;
-  
+  background-color: #B09EFF; /* 배경색을 보라색 계열로 설정합니다. */
+  color: #080808; /* 글자색을 거의 검은색으로 설정합니다. */
+  border: none; /* 테두리를 제거합니다. */
+  border-radius: 16px; /* 테두리를 둥글게 만듭니다. */
+  padding: 16px; /* 내부 여백을 16px로 설정합니다. */
+  font-size: 24px; /* 글자 크기 24px */
+  font-family: 'Univers Next Pro', sans-serif; /* 폰트 설정 */
+  font-weight: 600; /* 글자 두께를 굵게 설정합니다. */
+  cursor: pointer; /* 마우스 커서를 올렸을 때 손가락 모양으로 변경합니다. */
+  letter-spacing: -0.04em; /* 글자 간격을 살짝 좁게 설정합니다. */
+
+  /* 마우스 커서를 올렸을 때의 스타일 */
   &:hover {
-    opacity: 0.9;
+    opacity: 0.9; /* 투명도를 살짝 줄여서 흐릿하게 만듭니다. */
   }
 }
 
+/* 페이지 하단의 네비게이션 푸터 스타일 */
 .navigationFooter {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: #FFFFFF;
-  padding: 16px 48px;
-  margin-bottom: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 999;
+  position: fixed; /* 화면에 고정되도록 설정합니다. */
+  bottom: 0; /* 화면 하단에 붙도록 설정합니다. */
+  left: 0; /* 화면 왼쪽에 붙도록 설정합니다. */
+  right: 0; /* 화면 오른쪽에 붙도록 설정합니다. */
+  background-color: #FFFFFF; /* 배경색을 흰색으로 설정합니다. */
+  padding: 16px 48px; /* 위아래 패딩 16px, 좌우 패딩 48px */
+  margin-bottom: 16px; /* 아래쪽 마진을 16px 둡니다. (화면 하단에서 살짝 띄웁니다) */
+  display: flex; /* 자식 요소들을 유연하게 배치합니다. */
+  justify-content: space-between; /* 자식 요소들 사이에 균등한 공간을 분배합니다. */
+  align-items: center; /* 자식 요소들을 세로 중앙에 정렬합니다. */
+  z-index: 999; /* 다른 요소들 위에 항상 표시되도록 z-index를 매우 높게 설정합니다. */
 }
 
+/* 네비게이션 푸터의 버튼 스타일 */
 .navButton {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  background: transparent;
-  border: none;
-  color: #080808;
-  font-family: 'Univers Next Pro', sans-serif;
-  font-size: 24px;
-  font-weight: 400;
-  letter-spacing: -0.04em;
-  padding: 0;
-  line-height: 1;
-  position: relative;
-  
+  display: flex; /* 자식 요소들을 유연하게 배치합니다. */
+  align-items: center; /* 자식 요소들을 세로 중앙에 정렬합니다. */
+  gap: 4px; /* 자식 요소들 사이에 4px의 간격을 둡니다. */
+  background: transparent; /* 배경색을 투명하게 만듭니다. */
+  border: none; /* 테두리를 제거합니다. */
+  color: #080808; /* 글자색을 거의 검은색으로 설정합니다. */
+  font-family: 'Univers Next Pro', sans-serif; /* 폰트 설정 */
+  font-size: 24px; /* 글자 크기 24px */
+  font-weight: 400; /* 글자 두께 보통 */
+  letter-spacing: -0.04em; /* 글자 간격을 살짝 좁게 설정합니다. */
+  padding: 0; /* 내부 여백을 제거합니다. */
+  line-height: 1; /* 줄 높이를 1로 설정합니다. */
+  position: relative; /* 가상 요소 (::after)의 위치 설정을 위한 기준점을 만듭니다. */
+  cursor: pointer; /* 마우스 커서를 올렸을 때 손가락 모양으로 변경합니다. */
+
+
+  /* 버튼에 포커스되거나 활성화되었을 때의 외곽선 제거 */
   &:focus,
   &:active {
-    outline: none;
+    outline: none; /* 외곽선을 제거합니다. */
   }
-  
+
+  /* 버튼 텍스트 아래에 나타나는 밑줄 스타일 (초기 상태) */
   &::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background-color: #080808;
-    transition: width 0.3s;
+    content: ''; /* 가상 요소로 사용될 빈 콘텐츠를 만듭니다. */
+    position: absolute; /* 부모 요소 (.navButton)를 기준으로 위치를 설정합니다. */
+    bottom: -4px; /* 부모 요소의 아래쪽에서 4px 위에 위치합니다. */
+    left: 0; /* 부모 요소의 왼쪽 끝에 위치합니다. */
+    width: 0; /* 초기 너비를 0으로 설정하여 보이지 않게 합니다. */
+    height: 1px; /* 높이를 1px로 설정하여 얇은 선을 만듭니다. */
+    background-color: #080808; /* 배경색을 거의 검은색으로 설정합니다. */
+    transition: width 0.3s; /* 너비가 0.3초 동안 부드럽게 변하도록 설정합니다. */
   }
-  
+
+  /* 버튼에 마우스 커서를 올렸을 때 밑줄 스타일 */
   &:hover::after {
-    width: 100%;
+    width: 100%; /* 너비를 100%로 설정하여 밑줄이 나타나도록 합니다. */
   }
-  
+
+  /* 버튼에 마우스 커서를 올렸을 때 화살표 아이콘 스타일 */
   &:hover .arrowIcon {
-    transform: translateX(4px);
+    transform: translateX(4px); /* 화살표 아이콘을 오른쪽으로 4px 이동시킵니다. */
   }
-  
+
+  /* 현재 활성화된 버튼 스타일 */
   &.active {
-    font-weight: 500;
-    color: #080808;
-    
+    font-weight: 500; /* 글자 두께를 중간으로 설정합니다. */
+    color: #080808; /* 글자색을 거의 검은색으로 설정합니다. */
+
+    /* 활성화된 버튼의 밑줄 스타일 (애니메이션 없이 바로 표시) */
     &::after {
-      width: 100%;
-      transition: none;
+      width: 100%; /* 너비를 100%로 설정하여 밑줄이 나타나도록 합니다. */
+      transition: none; /* 애니메이션 효과를 제거합니다. */
     }
-    
+
+    /* 활성화된 버튼의 화살표 아이콘 스타일 */
     .arrowIcon {
-      transform: translateX(4px);
+      transform: translateX(4px); /* 화살표 아이콘을 오른쪽으로 4px 이동시킵니다. */
     }
   }
 }
 
+/* 네비게이션 버튼의 화살표 아이콘 스타일 */
 .arrowIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: none;
-  margin-left: 4px;
-  margin-bottom: 2px;
-  transition: transform 0.2s;
+  display: flex; /* 자식 요소들을 유연하게 배치합니다. */
+  align-items: center; /* 자식 요소들을 세로 중앙에 정렬합니다. */
+  justify-content: center; /* 자식 요소들을 가로 중앙에 정렬합니다. */
+  transform: none; /* 기본 transform 설정을 제거합니다. */
+  margin-left: 4px; /* 왼쪽에 4px 마진을 둡니다. */
+  margin-bottom: 2px; /* 아래쪽에 2px 마진을 둡니다. */
+  transition: transform 0.2s; /* transform 속성이 0.2초 동안 부드럽게 변하도록 설정합니다. */
 }
 
-/* 반응형 스타일 */
+/*
+  반응형 디자인을 위한 미디어 쿼리
+  다양한 화면 크기에 맞춰 레이아웃과 요소 크기를 조절합니다.
+*/
+
+/* 화면 너비가 1360px 이하일 때 적용 (메인 콘텐츠 레이아웃 변경) */
 @media (max-width: 1360px) {
   .mainContent {
-    flex-direction: column;
-    max-width: 672px;
+    flex-direction: column; /* 자식 요소들을 세로 방향으로 나열합니다. */
+    max-width: 672px; /* 최대 가로 너비를 672px로 제한합니다. */
   }
-  
+
+  /* 좌측 및 우측 섹션의 가로 너비를 100%로 설정합니다. */
   .leftSection,
   .rightSection {
     width: 100%;
   }
-  
+
+  /* 우측 섹션의 왼쪽 패딩을 제거하고 위쪽 마진을 추가합니다. */
   .rightSection {
     padding-left: 0;
     margin-top: 24px;
   }
 }
 
+/* 화면 너비가 768px 이하일 때 적용 (주로 태블릿) */
 @media (max-width: 768px) {
+  /* 헤더의 좌우 패딩을 조절합니다. */
   .coffeeBeanHeader {
     padding: 16px 24px;
   }
 
+  /* 메인 콘텐츠의 좌우 패딩을 조절합니다. */
   .mainContent {
     padding: 0 24px;
   }
 
+  /* 블렌딩 섹션의 가로 너비를 100%로 설정합니다. */
   .blendSection {
     width: 100%;
   }
 
+  /* 네비게이션 푸터의 좌우 패딩을 조절합니다. */
   .navigationFooter {
     padding: 16px 24px;
   }
 }
 
+/* 화면 너비가 480px 이하일 때 적용 (주로 모바일) */
 @media (max-width: 480px) {
+  /* 헤더의 좌우 패딩을 더 작게 조절합니다. */
   .coffeeBeanHeader {
     padding: 12px 16px;
   }
 
+  /* 메인 콘텐츠의 좌우 패딩을 더 작게 조절합니다. */
   .mainContent {
     padding: 0 16px;
   }
 
+  /* 네비게이션 푸터의 좌우 패딩을 더 작게 조절합니다. */
   .navigationFooter {
     padding: 12px 16px;
   }

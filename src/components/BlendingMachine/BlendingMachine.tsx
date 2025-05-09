@@ -35,7 +35,7 @@ const BlendingMachine: React.FC<BlendingMachineProps> = ({ onBlend }) => {
       {/* 헤더: 로고 표시 */}
       <header className={styles.coffeeBeanHeader}>
         <div className={styles.logo} onClick={handleLogoClick}>
-          <h1 className={styles.clickableLogo}>Coffee2</h1>
+          <h1 className={styles.clickableLogo}>Coffe2</h1>
         </div>
       </header>
       
