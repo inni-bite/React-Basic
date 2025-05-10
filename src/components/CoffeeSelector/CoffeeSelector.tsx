@@ -21,6 +21,7 @@ import styles from './CoffeeSelector.module.scss';
 */
 interface CoffeeSelectorProps {
   onSelectCoffee?: (coffeeId: string) => void;
+  onSelectTab?: (tab: number) => void;
 }
 
 /* 
@@ -34,7 +35,8 @@ type NavTab = 'coffee' | 'blend' | 'archive';
   카드 뷰를 지원하며, 탭 기능 포함.
 */
 const CoffeeSelector: React.FC<CoffeeSelectorProps> = ({ 
-  onSelectCoffee
+  onSelectCoffee,
+  onSelectTab
 }) => {
   /* 
     상태 관리: Jotai 원자를 사용해 상태를 관리.
@@ -76,9 +78,16 @@ const CoffeeSelector: React.FC<CoffeeSelectorProps> = ({
   /* 
     handleTabClick: 탭 클릭 시 실행.
     - 탭 상태 변경.
+    - 전역 탭 상태도 업데이트
   */
   const handleTabClick = (tab: NavTab) => {
     setLocalTab(tab); /* 탭 상태 업데이트 */
+    
+    // 전역 탭 상태 업데이트 (탭 이름을 인덱스로 변환)
+    if (onSelectTab) {
+      const tabIndex = tab === 'coffee' ? 0 : tab === 'blend' ? 1 : 2;
+      onSelectTab(tabIndex);
+    }
   };
 
   /* 

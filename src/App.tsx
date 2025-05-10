@@ -1,21 +1,15 @@
 import { useState, useEffect } from 'react';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtom } from 'jotai';
 import CoffeeSelector from './components/CoffeeSelector';
 import CoffeeDetails from './components/CoffeeDetails';
 import BlendingMachine from './components/BlendingMachine';
-import BlendResult from './components/BlendResult';
-import BlendCompare from './components/BlendCompare';
 import LandingPage from './components/LandingPage/LandingPage';
 import { 
-  showBlendResultAtom,
-  blendAnimationStateAtom,
-  showBlendCompareAtom
+  blendAnimationStateAtom
 } from './jotai/atoms/blendAtoms';
 import './App.css';
 
 function App() {
-  const showBlendResult = useAtomValue(showBlendResultAtom);
-  const showBlendCompare = useAtomValue(showBlendCompareAtom);
   const [, setBlendAnimationState] = useAtom(blendAnimationStateAtom);
   
   // 탭 선택 (-1: 랜딩 페이지, 0: 원두 탐색, 1: 블렌드 탐색, 2: 아카이브)
@@ -54,13 +48,11 @@ function App() {
         <LandingPage onSelectTab={setActiveTab} />
       ) : activeTab === 0 ? (
         // Coffee Bean 페이지
-        <CoffeeSelector />
+        <CoffeeSelector onSelectTab={setActiveTab} />
       ) : activeTab === 1 ? (
         // 블렌드 탭
         <div className="machine-container">
-          <BlendingMachine onBlend={handleBlend} />
-          {showBlendResult && <BlendResult />}
-          {showBlendCompare && <BlendCompare />}
+          <BlendingMachine onBlend={handleBlend} onSelectTab={setActiveTab} />
         </div>
       ) : activeTab === 2 ? (
         // 아카이브 탭

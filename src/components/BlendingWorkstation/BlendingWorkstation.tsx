@@ -2,15 +2,11 @@ import React from 'react'; // React만 import (useState 제거)
 import { useAtom, useSetAtom } from 'jotai';
 import {
   blendingComponentsAtom,
-  showBlendingWorkstationAtom,
-  showBlendResultAtom,
-  blendResultAtom,
   blendAnimationStateAtom,
-  isBlendedAtom, // 이 atom은 blendAtoms.ts 파일에 정의 및 export 필요
-  selectedBeanIdsAtom // 이 atom은 blendAtoms.ts 파일에 정의 및 export 필요
+  isBlendedAtom,
+  selectedBeanIdsAtom
 } from '../../jotai/atoms/blendAtoms';
 import { CoffeeBean } from '../../data/coffeeData';
-import { calculateBlendProfile } from '../../data/blendData';
 import coffeeBeans from '../../data/coffeeData';
 import CoffeeImage from '../CoffeeImage/CoffeeImage';
 import styles from './BlendingWorkstation.module.scss';
@@ -27,9 +23,6 @@ const BlendingWorkstation: React.FC<BlendingWorkstationProps> = ({
   showBeanSelectionOnly = false
 }) => {
   const [blendingComponents, setBlendingComponents] = useAtom(blendingComponentsAtom);
-  const setShowBlendingWorkstation = useSetAtom(showBlendingWorkstationAtom);
-  const setShowBlendResult = useSetAtom(showBlendResultAtom);
-  const setBlendResult = useSetAtom(blendResultAtom);
   const setBlendAnimationState = useSetAtom(blendAnimationStateAtom);
   const [, setIsBlended] = useAtom(isBlendedAtom); // isBlendedAtom 사용
 
@@ -98,45 +91,10 @@ const BlendingWorkstation: React.FC<BlendingWorkstationProps> = ({
     // 블렌딩 애니메이션 시작
     setBlendAnimationState('processing');
 
-    // 블렌드 결과 계산
-    const blendProfile = calculateBlendProfile(blendingComponents, coffeeBeans);
-
-    // 시간차를 두고 결과 표시 (가챠 효과)
+    // 애니메이션 완료로 변경
     setTimeout(() => {
-      // 새 블렌드 ID 생성 (타임스탬프)
-      const newBlendId = `blend-${Date.now()}`;
-
-      // 블렌드 이름 생성
-      const beanNames = blendingComponents
-        .sort((a, b) => b.ratio - a.ratio)
-        .map(comp => {
-          const bean = coffeeBeans.find(b => b.id === comp.beanId);
-          return bean ? bean.name.split(' ')[0] : '';
-        })
-        .filter(Boolean)
-        .slice(0, 2);
-
-      const blendName = beanNames.length > 1
-        ? `${beanNames.join(' & ')} Blend`
-        : `${beanNames[0]} Blend`;
-
-      // 블렌드 결과 저장
-      const newBlend = {
-        id: newBlendId,
-        name: blendName,
-        components: [...blendingComponents],
-        ...blendProfile
-      };
-
-      setBlendResult(newBlend);
       setBlendAnimationState('complete');
-
-      // 워크스테이션 닫고 결과 표시
-      setTimeout(() => {
-        setShowBlendingWorkstation(false);
-        setShowBlendResult(true);
-      }, 500);
-    }, 2000); // 2초 지연 (가챠 효과)
+    }, 2000);
   };
 
   // 비율 자동 조정 (100%에 맞추기)
@@ -175,6 +133,7 @@ const BlendingWorkstation: React.FC<BlendingWorkstationProps> = ({
   const handleReset = () => {
     setSelectedBeanIds([]);
     setBlendingComponents([]);
+    setIsBlended(false); // 이미지 상태 초기화
   };
 
   // 비율이 100%가 아닐 때 자동 조정 버튼 표시 여부
@@ -276,7 +235,7 @@ const BlendingWorkstation: React.FC<BlendingWorkstationProps> = ({
   if (showBeanSelection || showBeanSelectionOnly) {
     return (
       <div className={`${styles.blendingWorkstation} ${styles.beanSelectionOnly}`}>
-        {!showBeanSelectionOnly && (
+        {(showBeanSelection || !showBeanSelectionOnly) && (
           <div className={styles.resetButtonContainer}>
             <button className={styles.resetButton} onClick={handleReset}>
               Reset
