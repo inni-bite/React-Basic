@@ -7,7 +7,6 @@
   width: 100%; /* 가로 폭을 부모 요소에 꽉 채웁니다. */
   display: flex; /* 자식 요소들을 유연하게 배치합니다. */
   flex-direction: column; /* 자식 요소들을 세로 방향으로 나열합니다. */
-  gap: 24px; /* 자식 요소들 사이에 24px의 간격을 둡니다. */
   height: 100%; /* 세로 높이를 부모 요소에 꽉 채웁니다. */
 }
 
@@ -16,7 +15,6 @@
   width: 100%; /* 가로 폭을 부모 요소에 꽉 채웁니다. */
   display: flex; /* 자식 요소들을 유연하게 배치합니다. */
   flex-direction: column; /* 자식 요소들을 세로 방향으로 나열합니다. */
-  gap: 24px; /* 자식 요소들 사이에 24px의 간격을 둡니다. */
 }
 
 /* 'Reset' 버튼을 감싸는 컨테이너 스타일 */
@@ -57,12 +55,14 @@
 /* 각 원두 카드의 스타일 */
 .beanCard {
   width: 190px; /* 카드의 가로 너비를 190px로 설정합니다. */
-  height: 343px; /* 카드의 세로 높이를 343px로 설정합니다. */
+  align-items: flex-start;
   display: flex; /* 자식 요소들을 유연하게 배치합니다. */
   flex-direction: column; /* 자식 요소들을 세로 방향으로 나열합니다. */
   cursor: pointer; /* 마우스 커서를 올렸을 때 손가락 모양으로 변경합니다. */
   transition: transform 0.2s; /* transform 속성이 0.2초 동안 부드럽게 변하도록 설정합니다. */
   overflow: hidden; /* 카드 영역을 넘어가는 내용은 숨깁니다. */
+  border-radius: 4px; /* 테두리를 둥글게 만듭니다. */
+  gap: 12px; /* 자식 요소들 사이에 12px의 간격을 둡니다. */
 
   /* 마우스 커서를 올렸을 때의 스타일 */
   &:hover {
@@ -78,7 +78,6 @@
   .beanImage {
     width: 190px; /* 이미지 컨테이너의 가로 너비를 190px로 설정합니다. */
     height: 230px; /* 이미지 컨테이너의 세로 높이를 230px로 설정합니다. */
-    border-radius: 4px; /* 테두리를 둥글게 만듭니다. */
     overflow: hidden; /* 컨테이너 영역을 넘어가는 내용은 숨깁니다. */
 
     /* 이미지 자체의 스타일 */
@@ -93,8 +92,7 @@
   .beanInfo {
     display: flex; /* 자식 요소들을 유연하게 배치합니다. */
     flex-direction: column; /* 자식 요소들을 세로 방향으로 나열합니다. */
-    gap: 8px; /* 자식 요소들 사이에 8px의 간격을 둡니다. */
-    padding: 12px; /* 내부 여백을 12px로 설정합니다. */
+    gap: 4px; /* 자식 요소들 사이에 8px의 간격을 둡니다. */
 
     /* 원두 이름 (h4) 스타일 */
     h4 {
@@ -108,7 +106,7 @@
     /* 원두 정보 (p) 스타일 */
     p {
       margin: 0; /* 기본 마진을 제거합니다. */
-      font-size: 14px; /* 글자 크기를 14px로 설정합니다. */
+      font-size: 16px; /* 글자 크기를 14px로 설정합니다. */
       font-family: 'Univers Next Pro', sans-serif; /* 폰트 설정 */
       font-weight: 400; /* 글자 두께 설정 */
       color: #080808; /* 글자색 설정 */
@@ -141,26 +139,9 @@
   padding: 24px; /* 내부 여백을 24px로 설정합니다. */
   width: 100%; /* 가로 폭을 부모 요소에 꽉 채웁니다. */
   box-sizing: border-box; /* 패딩과 테두리를 너비 계산에 포함시킵니다. */
-  max-width: 455px; /* 최대 가로 너비를 455px로 제한합니다. */
+  max-width: 530px; /* 최대 가로 너비를 455px로 제한합니다. */
   margin: 0 auto; /* 중앙 정렬을 위해 좌우 마진을 자동으로 설정합니다. */
 
-
-  /* 원두 이미지 컨테이너 스타일 (선택된 항목용) */
-  .beanImageContainer {
-    width: 80px; /* 가로 너비 80px */
-    height: 80px; /* 세로 높이 80px */
-    border-radius: 50%; /* 완벽한 원 형태로 만듭니다. */
-    overflow: hidden; /* 영역을 넘어가는 내용은 숨깁니다. */
-    margin-right: 16px; /* 오른쪽에 16px 마진을 둡니다. */
-    flex-shrink: 0; /* 컨테이너 크기가 줄어들 때 이 요소는 줄어들지 않도록 합니다. */
-
-    /* 이미지 자체의 스타일 */
-    img {
-      width: 100%; /* 이미지를 컨테이너 너비에 꽉 채웁니다. */
-      height: 100%; /* 이미지를 컨테이너 높이에 꽉 채웁니다. */
-      object-fit: cover; /* 이미지 비율을 유지하면서 컨테이너에 맞게 크기를 조절합니다. */
-    }
-  }
 
   /* 원두 정보 영역 스타일 (선택된 항목용) */
   .beanInfo {
@@ -181,7 +162,7 @@
     /* 원두 정보 (p) 스타일 */
     p {
       margin: 0; /* 기본 마진 제거 */
-      font-size: 14px; /* 글자 크기 14px */
+      font-size: 16px; /* 글자 크기 14px */
       font-family: 'Univers Next Pro', sans-serif; /* 폰트 설정 */
       font-weight: 400; /* 글자 두께 설정 */
       color: #888888; /* 회색 계열 글자색 설정 */
@@ -192,7 +173,7 @@
   .ratioControl {
     display: flex; /* 자식 요소들을 유연하게 배치합니다. */
     align-items: center; /* 자식 요소들을 세로 중앙에 정렬합니다. */
-    flex-wrap: wrap; /* 공간이 부족하면 다음 줄로 넘어가도록 설정합니다. */
+    flex-wrap: nowwrap; /* 공간이 부족하면 다음 줄로 넘어가도록 설정합니다. */
     gap: 8px; /* 자식 요소들 사이에 8px의 간격을 둡니다. */
 
     /* 비율 조절 버튼 (+/-) 스타일 */
