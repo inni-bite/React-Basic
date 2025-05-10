@@ -1,26 +1,44 @@
+:root {
+  --color-white-opaque: rgba(255, 255, 255, 1); /* 완전 불투명 흰색 배경 */
+  --z-index-loading: 1000; /* 로딩 화면이 다른 모든 요소 위에 오도록 */
+  --max-image-width: 800px; /* 로딩 이미지의 최대 너비 */
+}
+
+/* 
+  로딩 래퍼: 로딩 화면 전체를 감싸는 박스.
+  화면 전체를 덮고, 로딩 중임을 보여주는 콘텐츠를 가운데에 배치.
+*/
 .loadingWrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 100);
-    z-index: 1000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .loadingContent {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-  
-  .loadingImage {
-    width: 100vw;
-    max-width: 800px; // 필요에 따라 조정
-    height: auto;
-    object-fit: contain;
-  }
+  position: fixed; /* 화면에 고정되어 스크롤해도 움직이지 않음 */
+  top: 0; /* 화면 맨 위부터 */
+  left: 0; /* 화면 맨 왼쪽부터 */
+  width: 100%; /* 화면 너비 전체 */
+  height: 100%; /* 화면 높이 전체 */
+  background: var(--color-white-opaque); /* 완전 불투명한 흰색 배경 */
+  z-index: var(--z-index-loading); /* 다른 모든 요소 위에 표시 */
+  display: flex; /* 내부 콘텐츠를 유연하게 배치 */
+  justify-content: center; /* 콘텐츠를 가로 가운데 정렬 */
+  align-items: center; /* 콘텐츠를 세로 가운데 정렬 */
+}
+
+/* 
+  로딩 콘텐츠: 로딩 이미지와 텍스트(필요 시)를 담는 박스.
+  콘텐츠를 세로로 쌓고 가운데 정렬.
+*/
+.loadingContent {
+  display: flex; /* 내부 콘텐츠를 유연하게 배치 */
+  justify-content: center; /* 가로 가운데 정렬 */
+  align-items: center; /* 세로 가운데 정렬 */
+  flex-direction: column; /* 콘텐츠를 위에서 아래로 쌓이도록 */
+}
+
+/* 
+  로딩 이미지: 로딩 중에 보여줄 이미지(예: 로고나 애니메이션).
+  화면 크기에 맞게 조정되며, 너무 커지지 않도록 최대 너비 설정.
+*/
+.loadingImage {
+  width: 100vw; /* 이미지 너비를 화면 너비에 맞춤 */
+  max-width: var(--max-image-width); /* 이미지가 800px보다 커지지 않도록 */
+  height: auto; /* 높이는 이미지 비율에 따라 자동 조정 */
+  object-fit: contain; /* 이미지가 찌그러지지 않고 전체가 보이도록 */
+}

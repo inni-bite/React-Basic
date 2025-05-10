@@ -1,244 +1,372 @@
+/*
+  BlendingWorkstation 컴포넌트의 전체 스타일을 정의합니다.
+  이 스타일은 커피 원두를 선택하고 블렌딩 비율을 조절하는 워크스테이션의
+  전반적인 레이아웃과 디자인을 담당합니다.
+*/
 .blendingWorkstation {
-  position: relative;
-  background-color: #f8f4f0;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  max-width: 800px;
-  margin: 0 auto;
-  
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #432a2a;
-    font-size: 1.8rem;
-  }
+  width: 100%; /* 가로 폭을 부모 요소에 꽉 채웁니다. */
+  display: flex; /* 자식 요소들을 유연하게 배치합니다. */
+  flex-direction: column; /* 자식 요소들을 세로 방향으로 나열합니다. */
+  height: 100%; /* 세로 높이를 부모 요소에 꽉 채웁니다. */
 }
 
-.closeButton {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  color: #666;
-  cursor: pointer;
-  
+/* 워크스테이션 내부 콘텐츠를 담는 컨테이너 스타일 */
+.container {
+  width: 100%; /* 가로 폭을 부모 요소에 꽉 채웁니다. */
+  display: flex; /* 자식 요소들을 유연하게 배치합니다. */
+  flex-direction: column; /* 자식 요소들을 세로 방향으로 나열합니다. */
+}
+
+/* 'Reset' 버튼을 감싸는 컨테이너 스타일 */
+.resetButtonContainer {
+  display: flex; /* 자식 요소를 유연하게 배치합니다. */
+  justify-content: flex-start; /* 자식 요소를 컨테이너의 시작점(왼쪽)에 정렬합니다. */
+  padding: 0 14px; /* 위아래 패딩은 0, 좌우 패딩은 14px입니다. */
+  margin-bottom: 24px; /* 아래쪽 마진을 24px 둡니다. */
+}
+
+/* 'Reset' 버튼 자체의 스타일 */
+.resetButton {
+  background-color: transparent; /* 배경색을 투명하게 만듭니다. */
+  color: #080808; /* 글자색을 거의 검은색으로 설정합니다. */
+  border: 2px solid #B09EFF; /* 보라색 계열의 2px 두께 테두리를 추가합니다. */
+  border-radius: 16px; /* 테두리를 둥글게 만듭니다. */
+  padding: 16px; /* 버튼 내부의 여백을 16px로 설정합니다. */
+  font-size: 24px; /* 글자 크기를 24px로 설정합니다. */
+  font-family: 'Univers Next Pro', sans-serif; /* 'Univers Next Pro' 폰트를 사용하고, 없으면 기본 sans-serif 폰트를 사용합니다. */
+  font-weight: 600; /* 글자 두께를 굵게 설정합니다. */
+  cursor: pointer; /* 마우스 커서를 올렸을 때 손가락 모양으로 변경합니다. */
+
+  /* 마우스 커서를 올렸을 때의 스타일 */
   &:hover {
-    color: #333;
+    background-color: rgba(176, 158, 255, 0.1); /* 배경색을 연한 보라색으로 변경합니다 (투명도 0.1). */
   }
 }
 
+/* 원두 선택 영역의 스타일 */
 .beanSelectionArea {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 15px;
-  margin-bottom: 20px;
+  display: grid; /* 자식 요소들을 격자 형태로 배치합니다. */
+  grid-template-columns: repeat(3, 190px); /* 3개의 열을 만들고 각 열의 너비를 190px로 설정합니다. */
+  gap: 24px; /* 격자 항목들 사이에 24px의 간격을 둡니다. */
+  padding: 0 14px; /* 위아래 패딩은 0, 좌우 패딩은 14px입니다. */
+  justify-content: center; /* 격자 항목들을 컨테이너 중앙에 정렬합니다. */
 }
 
+/* 각 원두 카드의 스타일 */
 .beanCard {
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-  position: relative;
-  overflow: hidden;
-  
+  width: 190px; /* 카드의 가로 너비를 190px로 설정합니다. */
+  align-items: flex-start;
+  display: flex; /* 자식 요소들을 유연하게 배치합니다. */
+  flex-direction: column; /* 자식 요소들을 세로 방향으로 나열합니다. */
+  cursor: pointer; /* 마우스 커서를 올렸을 때 손가락 모양으로 변경합니다. */
+  transition: transform 0.2s; /* transform 속성이 0.2초 동안 부드럽게 변하도록 설정합니다. */
+  overflow: hidden; /* 카드 영역을 넘어가는 내용은 숨깁니다. */
+  border-radius: 4px; /* 테두리를 둥글게 만듭니다. */
+  gap: 12px; /* 자식 요소들 사이에 12px의 간격을 둡니다. */
+
+  /* 마우스 커서를 올렸을 때의 스타일 */
   &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px); /* 카드를 위로 3px 살짝 올립니다. */
   }
-  
+
+  /* 선택된 원두 카드의 스타일 */
   &.selected {
-    border: 2px solid #8c6035;
+    border: 2px solid #FFD700; /* 황금색 2px 두께의 테두리를 추가합니다. */
   }
-  
-  h4 {
-    margin: 0 0 8px;
-    color: #432a2a;
-  }
-  
-  p {
-    margin: 0;
-    font-size: 0.9rem;
-    color: #666;
-  }
-  
-  .roastLevel {
-    display: inline-block;
-    padding: 3px 6px;
-    border-radius: 4px;
-    font-size: 0.7rem;
-    font-weight: bold;
-    margin-top: 8px;
-    
-    &.light {
-      background-color: #e9d8c0;
-      color: #6b5035;
-    }
-    
-    &.medium {
-      background-color: #d3aa74;
-      color: #fff;
-    }
-    
-    &.mediumDark {
-      background-color: #a67c52;
-      color: #fff;
-    }
-    
-    &.dark {
-      background-color: #5e412f;
-      color: #fff;
+
+  /* 원두 이미지 컨테이너 스타일 */
+  .beanImage {
+    width: 190px; /* 이미지 컨테이너의 가로 너비를 190px로 설정합니다. */
+    height: 230px; /* 이미지 컨테이너의 세로 높이를 230px로 설정합니다. */
+    overflow: hidden; /* 컨테이너 영역을 넘어가는 내용은 숨깁니다. */
+
+    /* 이미지 자체의 스타일 */
+    img {
+      width: 100%; /* 이미지를 컨테이너 너비에 꽉 채웁니다. */
+      height: 100%; /* 이미지를 컨테이너 높이에 꽉 채웁니다. */
+      object-fit: cover; /* 이미지 비율을 유지하면서 컨테이너에 맞게 크기를 조절합니다. */
     }
   }
-}
 
-.blendingArea {
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 20px;
-  margin-top: 20px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-}
-
-.selectedBeansSection {
-  margin-bottom: 20px;
-  
-  h3 {
-    font-size: 1.2rem;
-    color: #432a2a;
-    margin-bottom: 10px;
-  }
-}
-
-.selectedBeansList {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.selectedBeanItem {
-  display: flex;
-  align-items: center;
-  background-color: #f8f4f0;
-  border-radius: 6px;
-  padding: 8px 12px;
-  
+  /* 원두 정보 영역 스타일 */
   .beanInfo {
-    flex: 1;
-    
+    display: flex; /* 자식 요소들을 유연하게 배치합니다. */
+    flex-direction: column; /* 자식 요소들을 세로 방향으로 나열합니다. */
+    gap: 4px; /* 자식 요소들 사이에 8px의 간격을 둡니다. */
+
+    /* 원두 이름 (h4) 스타일 */
     h4 {
-      margin: 0;
-      font-size: 1rem;
+      margin: 0; /* 기본 마진을 제거합니다. */
+      font-size: 18px; /* 글자 크기를 18px로 설정합니다. */
+      font-family: 'Univers Next Pro', sans-serif; /* 폰트 설정 */
+      font-weight: 500; /* 글자 두께 설정 */
+      color: #080808; /* 글자색 설정 */
     }
-    
+
+    /* 원두 정보 (p) 스타일 */
     p {
-      margin: 3px 0 0;
-      font-size: 0.8rem;
-      color: #666;
+      margin: 0; /* 기본 마진을 제거합니다. */
+      font-size: 16px; /* 글자 크기를 14px로 설정합니다. */
+      font-family: 'Univers Next Pro', sans-serif; /* 폰트 설정 */
+      font-weight: 400; /* 글자 두께 설정 */
+      color: #080808; /* 글자색 설정 */
     }
   }
-  
+}
+
+/* 선택된 원두 목록을 담는 전체 섹션 스타일 */
+.selectedBeansSection {
+  width: 100%; /* 가로 폭을 부모 요소에 꽉 채웁니다. */
+  display: flex; /* 자식 요소들을 유연하게 배치합니다. */
+  flex-direction: column; /* 자식 요소들을 세로 방향으로 나열합니다. */
+  gap: 24px; /* 자식 요소들 사이에 24px의 간격을 둡니다. */
+}
+
+/* 선택된 개별 원두 항목들의 목록 스타일 */
+.selectedBeansList {
+  display: flex; /* 자식 요소들을 유연하게 배치합니다. */
+  flex-direction: column; /* 자식 요소들을 세로 방향으로 나열합니다. */
+  gap: 24px; /* 자식 요소들 사이에 24px의 간격을 둡니다. */
+}
+
+/* 선택된 개별 원두 항목 하나의 스타일 */
+.selectedBeanItem {
+  display: flex; /* 자식 요소들을 유연하게 배치합니다. */
+  align-items: center; /* 자식 요소들을 세로 중앙에 정렬합니다. */
+  justify-content: space-between; /* 자식 요소들 사이에 균등한 공간을 분배합니다. */
+  background-color: #FFD700; /* 배경색을 황금색으로 설정합니다. */
+  border-radius: 30px; /* 테두리를 둥글게 만듭니다. */
+  padding: 24px; /* 내부 여백을 24px로 설정합니다. */
+  width: 100%; /* 가로 폭을 부모 요소에 꽉 채웁니다. */
+  box-sizing: border-box; /* 패딩과 테두리를 너비 계산에 포함시킵니다. */
+  max-width: 530px; /* 최대 가로 너비를 455px로 제한합니다. */
+  margin: 0 auto; /* 중앙 정렬을 위해 좌우 마진을 자동으로 설정합니다. */
+
+
+  /* 원두 정보 영역 스타일 (선택된 항목용) */
+  .beanInfo {
+    display: flex; /* 자식 요소들을 유연하게 배치합니다. */
+    flex-direction: column; /* 자식 요소들을 세로 방향으로 나열합니다. */
+    gap: 8px; /* 자식 요소들 사이에 8px의 간격을 둡니다. */
+    width: 100%; /* 가로 폭을 부모 요소에 꽉 채웁니다. */
+
+    /* 원두 이름 (h4) 스타일 */
+    h4 {
+      margin: 0; /* 기본 마진 제거 */
+      font-size: 18px; /* 글자 크기 18px */
+      font-family: 'Univers Next Pro', sans-serif; /* 폰트 설정 */
+      font-weight: 500; /* 글자 두께 설정 */
+      color: #080808; /* 글자색 설정 */
+    }
+
+    /* 원두 정보 (p) 스타일 */
+    p {
+      margin: 0; /* 기본 마진 제거 */
+      font-size: 16px; /* 글자 크기 14px */
+      font-family: 'Univers Next Pro', sans-serif; /* 폰트 설정 */
+      font-weight: 400; /* 글자 두께 설정 */
+      color: #888888; /* 회색 계열 글자색 설정 */
+    }
+  }
+
+  /* 비율 조절 컨트롤 스타일 */
   .ratioControl {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    
+    display: flex; /* 자식 요소들을 유연하게 배치합니다. */
+    align-items: center; /* 자식 요소들을 세로 중앙에 정렬합니다. */
+    flex-wrap: nowwrap; /* 공간이 부족하면 다음 줄로 넘어가도록 설정합니다. */
+    gap: 8px; /* 자식 요소들 사이에 8px의 간격을 둡니다. */
+
+    /* 비율 조절 버튼 (+/-) 스타일 */
     button {
-      background-color: #e4d6c9;
-      border: none;
-      border-radius: 4px;
-      width: 25px;
-      height: 25px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.2s;
-      
+      background-color: #B09EFF; /* 배경색을 보라색 계열로 설정합니다. */
+      border: none; /* 테두리를 제거합니다. */
+      border-radius: 4px; /* 테두리를 둥글게 만듭니다. */
+      width: 24px; /* 가로 너비 24px */
+      height: 24px; /* 세로 높이 24px */
+      display: flex; /* 자식 요소들을 유연하게 배치합니다. */
+      align-items: center; /* 자식 요소들을 세로 중앙에 정렬합니다. */
+      justify-content: center; /* 자식 요소들을 가로 중앙에 정렬합니다. */
+      font-weight: bold; /* 글자 두께를 굵게 설정합니다. */
+      cursor: pointer; /* 마우스 커서를 올렸을 때 손가락 모양으로 변경합니다. */
+      color: #000000; /* 글자색을 검은색으로 설정합니다. */
+
+      /* 마우스 커서를 올렸을 때의 스타일 */
       &:hover {
-        background-color: #d3aa74;
-        color: white;
+        opacity: 0.9; /* 투명도를 살짝 줄여서 흐릿하게 만듭니다. */
       }
     }
-    
+
+    /* 'Remove' 버튼 스타일 */
+    .removeButton {
+      background-color: #ff6b6b; /* 배경색을 빨간색 계열로 설정합니다. */
+      color: white; /* 글자색을 흰색으로 설정합니다. */
+      width: auto; /* 가로 너비를 내용에 맞게 자동 조절합니다. */
+      padding: 0 10px; /* 위아래 패딩 0, 좌우 패딩 10px */
+      height: 28px; /* 세로 높이 28px */
+      font-weight: 500; /* 글자 두께 설정 */
+      font-size: 14px; /* 글자 크기 14px */
+      border-radius: 14px; /* 테두리를 둥글게 만듭니다. */
+      margin-left: 4px; /* 왼쪽에 4px 마진을 둡니다. */
+      transition: background-color 0.2s; /* 배경색이 0.2초 동안 부드럽게 변하도록 설정합니다. */
+
+      /* 마우스 커서를 올렸을 때의 스타일 */
+      &:hover {
+        background-color: #ff5252; /* 배경색을 더 진한 빨간색으로 변경합니다. */
+      }
+    }
+
+    /* 비율 숫자 (span) 스타일 */
     span {
-      width: 35px;
-      text-align: center;
-      font-weight: bold;
-    }
-  }
-  
-  .removeButton {
-    background: none;
-    border: none;
-    color: #8c6035;
-    cursor: pointer;
-    margin-left: 10px;
-    
-    &:hover {
-      color: #5e3920;
+      font-family: 'Univers Next Pro', sans-serif; /* 폰트 설정 */
+      font-weight: 600; /* 글자 두께를 굵게 설정합니다. */
+      font-size: 16px; /* 글자 크기 16px */
+      color: #000000; /* 글자색을 검은색으로 설정합니다. */
+      text-align: center; /* 글자를 가운데 정렬합니다. */
+      min-width: 40px; /* 최소 가로 너비를 40px로 설정합니다. */
     }
   }
 }
 
-.createBlendSection {
-  margin-top: 25px;
-  text-align: center;
-  
-  button {
-    background-color: #8c6035;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    padding: 12px 24px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    
+/* 총 비율 및 자동 조정 버튼을 담는 컨테이너 스타일 */
+.ratioContainer {
+  display: flex; /* 자식 요소들을 유연하게 배치합니다. */
+  justify-content: center; /* 자식 요소들을 가로 중앙에 정렬합니다. */
+  align-items: center; /* 자식 요소들을 세로 중앙에 정렬합니다. */
+  gap: 97px; /* 자식 요소들 사이에 97px의 간격을 둡니다. */
+  margin-top: 20px; /* 위쪽 마진을 20px 둡니다. */
+
+  /* 총 비율 텍스트 (p) 스타일 */
+  p {
+    margin: 0; /* 기본 마진 제거 */
+    font-size: 16px; /* 글자 크기 16px */
+    font-family: 'Univers Next Pro', sans-serif; /* 폰트 설정 */
+    font-weight: 400; /* 글자 두께 설정 */
+    color: #888888; /* 회색 계열 글자색 설정 */
+  }
+
+  /* '자동 조정' 버튼 스타일 */
+  .adjustButton {
+    background-color: #080808; /* 배경색을 거의 검은색으로 설정합니다. */
+    color: #FFFFFF; /* 글자색을 흰색으로 설정합니다. */
+    border: none; /* 테두리를 제거합니다. */
+    border-radius: 4px; /* 테두리를 둥글게 만듭니다. */
+    padding: 8px; /* 내부 여백을 8px로 설정합니다. */
+    font-size: 16px; /* 글자 크기 16px */
+    font-family: 'Univers Next Pro', sans-serif; /* 폰트 설정 */
+    font-weight: 400; /* 글자 두께 설정 */
+    cursor: pointer; /* 마우스 커서를 올렸을 때 손가락 모양으로 변경합니다. */
+
+    /* 마우스 커서를 올렸을 때의 스타일 */
     &:hover {
-      background-color: #5e3920;
+      opacity: 0.9; /* 투명도를 살짝 줄여서 흐릿하게 만듭니다. */
     }
-    
+  }
+}
+
+/* 'Blend' 버튼을 담는 컨테이너 스타일 */
+.actionButtons {
+  display: flex; /* 자식 요소들을 유연하게 배치합니다. */
+  justify-content: center; /* 자식 요소들을 가로 중앙에 정렬합니다. */
+  align-items: center; /* 자식 요소들을 세로 중앙에 정렬합니다. */
+  margin-top: 24px; /* 위쪽 마진을 24px 둡니다. */
+
+  /* 'Blend' 버튼 자체의 스타일 */
+  .blendButton {
+    background-color: #B09EFF; /* 배경색을 보라색 계열로 설정합니다. */
+    color: #080808; /* 글자색을 거의 검은색으로 설정합니다. */
+    border: none; /* 테두리를 제거합니다. */
+    border-radius: 16px; /* 테두리를 둥글게 만듭니다. */
+    padding: 16px; /* 내부 여백을 16px로 설정합니다. */
+    font-size: 24px; /* 글자 크기 24px */
+    font-family: 'Univers Next Pro', sans-serif; /* 폰트 설정 */
+    font-weight: 600; /* 글자 두께를 굵게 설정합니다. */
+    cursor: pointer; /* 마우스 커서를 올렸을 때 손가락 모양으로 변경합니다. */
+    letter-spacing: -0.04em; /* 글자 간격을 살짝 좁게 설정합니다. */
+
+    /* 마우스 커서를 올렸을 때의 스타일 */
+    &:hover {
+      opacity: 0.9; /* 투명도를 살짝 줄여서 흐릿하게 만듭니다. */
+    }
+
+    /* 버튼이 비활성화되었을 때의 스타일 */
     &:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
+      background-color: #ccc; /* 배경색을 회색으로 변경합니다. */
+      cursor: not-allowed; /* 마우스 커서를 금지 표시로 변경합니다. */
     }
   }
 }
 
-.noBeansSelected {
-  text-align: center;
-  padding: 20px;
-  color: #666;
-  font-style: italic;
+/*
+  컴포넌트의 특정 상태에 따른 스타일 (props에 따라 다르게 렌더링될 때 사용)
+*/
+
+/* 'showSelectionOnly' prop이 true일 때 적용되는 스타일 */
+.selectionOnly {
+  width: 100%; /* 가로 폭을 부모 요소에 꽉 채웁니다. */
+  max-width: 530px; /* 최대 가로 너비를 530px로 제한합니다. */
+  margin: 0 auto; /* 중앙 정렬을 위해 좌우 마진을 자동으로 설정합니다. */
+  padding: 20px 0; /* 위아래 패딩 20px, 좌우 패딩 0 */
 }
 
-.totalRatio {
-  text-align: right;
-  margin-top: 10px;
-  font-size: 0.9rem;
-  color: #666;
-  
-  &.error {
-    color: #e74c3c;
-    font-weight: bold;
+/* 'showBeanSelectionOnly' 또는 'showBeanSelection' prop이 true일 때 적용되는 스타일 */
+.beanSelectionOnly {
+  width: 100%; /* 가로 폭을 부모 요소에 꽉 채웁니다. */
+}
+
+/*
+  반응형 디자인을 위한 미디어 쿼리
+  화면 너비가 768px 이하일 때 적용됩니다. (주로 태블릿 및 모바일)
+*/
+@media (max-width: 768px) {
+  /* 선택된 개별 원두 항목의 최대 너비를 100%로 설정하여 작은 화면에 맞게 조절합니다. */
+  .selectedBeanItem {
+    max-width: 100%;
+  }
+
+  /* 총 비율 컨테이너의 배치 방향을 세로로 변경하고 간격을 조절합니다. */
+  .ratioContainer {
+    flex-direction: column; /* 자식 요소들을 세로 방향으로 나열합니다. */
+    gap: 12px; /* 자식 요소들 사이에 12px의 간격을 둡니다. */
+  }
+
+  /* 원두 선택 영역의 열 개수를 2개로 변경하고 각 열의 너비를 자동으로 조절합니다. */
+  .beanSelectionArea {
+     grid-template-columns: repeat(2, 1fr); /* 2개의 열을 만들고 각 열의 너비를 균등하게 분배합니다. */
+     gap: 16px; /* 격자 항목들 사이의 간격을 16px로 조절합니다. */
+     padding: 0 10px; /* 좌우 패딩을 10px로 조절합니다. */
+  }
+
+  /* 원두 카드의 가로 너비를 부모 요소에 맞게 조절합니다. */
+  .beanCard {
+    width: 100%; /* 가로 너비를 부모 요소에 꽉 채웁니다. */
+    height: auto; /* 세로 높이를 내용에 맞게 자동 조절합니다. */
+  }
+
+  /* 원두 이미지 컨테이너의 크기를 조절합니다. */
+  .beanImage {
+    width: 100%; /* 가로 너비를 부모 요소에 꽉 채웁니다. */
+    height: 180px; /* 세로 높이를 180px로 조절합니다. */
+  }
+
+   /* 'Reset' 버튼 컨테이너의 패딩을 조절합니다. */
+  .resetButtonContainer {
+    padding: 0 10px; /* 좌우 패딩을 10px로 조절합니다. */
   }
 }
 
-// 애니메이션 관련 스타일
+
+/*
+  애니메이션 관련 스타일
+*/
+
+/* 'pulse' 애니메이션 정의: 요소가 커졌다 작아졌다 반복하는 효과 */
 @keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
+  0% { transform: scale(1); } /* 시작: 원래 크기 */
+  50% { transform: scale(1.05); } /* 중간: 1.05배 커짐 */
+  100% { transform: scale(1); } /* 끝: 다시 원래 크기 */
 }
 
+/* 'pulseAnimation' 클래스가 적용된 요소에 'pulse' 애니메이션을 무한 반복 적용 */
 .pulseAnimation {
-  animation: pulse 2s infinite;
+  animation: pulse 2s infinite; /* pulse 애니메이션을 2초 동안 실행하고 무한히 반복합니다. */
 }

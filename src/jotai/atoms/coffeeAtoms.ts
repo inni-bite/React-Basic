@@ -10,4 +10,5 @@ export const showCoffeeDetailsAtom = atom<boolean>(false);
 // Atom for tracking the grinding sound playing state
 export const isGrindingSoundPlayingAtom = atom<boolean>(false);
 
+// Atom for controlling the loading modal display
 export const isLoadingModalAtom = atom<boolean>(false);

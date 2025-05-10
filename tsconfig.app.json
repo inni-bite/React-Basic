@@ -29,7 +29,7 @@
       "@assets/*": ["src/assets/*"],
       "@pages/*": ["src/pages/*"],
       "@types/*": ["src/types/*"],
-      "@recoil/*": ["src/jotai/*"],
+      "@atoms/*": ["src/jotai/*"],
       "@apis/*": ["src/apis/*"]
     },
     "noImplicitAny": false,

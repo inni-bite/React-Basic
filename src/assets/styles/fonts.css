@@ -1,44 +1,13 @@
-/* Univers Next Pro 폰트 설정 */
-@font-face {
-  font-family: 'Univers Next Pro';
-  src: url('/fonts/UniversNextProRegular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
+/* 
+  Univers Next Pro 폰트 설정: 웹사이트에서 사용할 맞춤 글꼴을 정의.
+  @font-face는 로컬 또는 서버에서 폰트 파일을 불러와 사용 가능하게 함.
+  font-display: swap은 폰트가 로드되기 전에도 텍스트가 보이도록 함.
+*/
 
-@font-face {
-  font-family: 'Univers Next Pro';
-  src: url('/fonts/UniversNextProItalic.ttf') format('truetype');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Univers Next Pro';
-  src: url('/fonts/UniversNextProBold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Univers Next Pro';
-  src: url('/fonts/UniversNextProBold.ttf') format('truetype');
-  font-weight: 750; /* 피그마 디자인에 맞춘 가중치 */
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Univers Next Pro';
-  src: url('/fonts/UniversNextProBoldItalic.ttf') format('truetype');
-  font-weight: 700;
-  font-style: italic;
-  font-display: swap;
-}
-
+/* 
+  가벼운 스타일 (300): 얇고 부드러운 느낌의 텍스트.
+  Univers Next Pro Light.ttf 파일 사용.
+*/
 @font-face {
   font-family: 'Univers Next Pro';
   src: url('/fonts/Univers Next Pro Light.ttf') format('truetype');
@@ -47,27 +16,51 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'Univers Next Pro';
-  src: url('/fonts/Univers Next Pro Light Italic.ttf') format('truetype');
-  font-weight: 300;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* 피그마 디자인에 필요한 추가 가중치 설정 */
+/* 
+  기본 스타일 (400): 가장 흔히 쓰이는 보통 굵기.
+  UniversNextProRegular.ttf 파일 사용.
+*/
 @font-face {
   font-family: 'Univers Next Pro';
   src: url('/fonts/UniversNextProRegular.ttf') format('truetype');
-  font-weight: 500; /* Medium */
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
+/* 
+  중간 스타일 (500): Medium 굵기, 약간 더 두꺼운 느낌.
+  UniversNextProMedium.ttf와 UniversNextProRegular.ttf가 중복되었으므로
+  Medium.ttf를 우선 사용하고, 필요 시 Regular로 대체 가능.
+*/
+@font-face {
+  font-family: 'Univers Next Pro';
+  src: url('/fonts/UniversNextProMedium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 
+  반굵은 스타일 (600): Semibold 굵기, 강조할 때 사용.
+  UniversNextProBold.ttf 파일 사용.
+*/
 @font-face {
   font-family: 'Univers Next Pro';
   src: url('/fonts/UniversNextProBold.ttf') format('truetype');
-  font-weight: 600; /* Semibold */
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 
+  굵은 스타일 (700): Bold 굵기, 제목이나 중요한 텍스트에 적합.
+  UniversNextProBold.ttf 파일 사용.
+*/
+@font-face {
+  font-family: 'Univers Next Pro';
+  src: url('/fonts/UniversNextProBold.ttf') format('truetype');
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
