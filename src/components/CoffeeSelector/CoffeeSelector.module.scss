@@ -307,6 +307,10 @@
   1440px 이하: 카드 줄 바꿈 및 간격 조정.
 */
 @media (max-width: 1440px) {
+  .coffeeBeanHeader h1 {
+    font-size: var(--font-size-large); /* 28px */
+  }
+
   .coffeeRow {
     flex-wrap: wrap; /* 카드 줄 바꿈 */
     gap: 30px; /* 간격 30px */
@@ -367,7 +371,7 @@
 */
 @media (max-width: 576px) {
   .coffeeBeanPage {
-    padding: 0 12px; /* 좌우 12px */
+    padding: 0 16px; /* 좌우 16px */
     padding-bottom: 200px; /* 하단 여백 200px */
   }
 

@@ -5,10 +5,11 @@
 */
 import React, { useEffect, useState } from 'react';
 /* 
-  SCSS 파일을 가져옴. 
+  SCSS 모듈 파일을 가져옴. 
   랜딩 페이지의 스타일(예: 색상, 위치, 애니메이션)을 정의.
+  CSS 모듈을 사용하여 스타일 충돌 방지.
 */
-import './LandingPage.scss';
+import styles from './LandingPage.module.scss';
 
 /* 로고 이미지 배열: 애니메이션에 사용할 이미지 경로. 순서대로 표시되며, 마지막에 커피콩 이미지가 나타남. */
 const LOGO_IMAGES = [
@@ -35,9 +36,9 @@ const NavButton: React.FC<{
   tabIndex: number;
   onClick: (tab: number) => void;
 }> = ({ label, tabIndex, onClick }) => (
-  <button className="nav-button" onClick={() => onClick(tabIndex)}>
+  <button className={styles['nav-button']} onClick={() => onClick(tabIndex)}>
     {label} {/* 버튼 텍스트, 예: "Coffee Bean" */}
-    <div className="arrow-icon">
+    <div className={styles['arrow-icon']}>
       {/* 화살표 아이콘: SVG로 그려진 화살표, 호버 시 이동 */}
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M5 19L19 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
@@ -104,36 +105,36 @@ const LandingPage: React.FC<LandingPageProps> = ({ onSelectTab }) => {
     - 푸터: 내비게이션 버튼
   */
   return (
-    <div className="landing-page">
+    <div className={styles['landing-page']}>
       {/* 헤더: 로고와 태그라인을 표시 */}
-      <header className="landing-header">
-        <div className="logo" onClick={() => onSelectTab(-1)}>
+      <header className={styles['landing-header']}>
+        <div className={styles.logo} onClick={() => onSelectTab(-1)}>
           {/* 로고 텍스트: 클릭 시 onSelectTab(-1) 호출 */}
           <h1>Coffe2</h1>
         </div>
-        <div className="tagline">
+        <div className={styles.tagline}>
           {/* 태그라인: 커피와 관련된 문구 */}
           <p>A celebration of coffee and the moments that brew them.</p>
         </div>
       </header>
 
       {/* 구분선: 헤더와 본문을 구분하는 얇은 선 */}
-      <div className="divider" />
+      <div className={styles.divider} />
 
       {/* 로고 애니메이션: 이미지들이 순서대로 페이드 인/아웃 */}
-      <div className="logo-animation">
+      <div className={styles['logo-animation']}>
         {LOGO_IMAGES.map((src, index) => (
           <img
             key={index} // 각 이미지에 고유 키 부여 (React 요구사항)
             src={src} // 이미지 경로
             alt={`Logo ${index}`} // 접근성을 위한 대체 텍스트
-            className={index === currentLogoIndex ? 'active' : ''} // 현재 인덱스에 active 클래스 추가
+            className={index === currentLogoIndex ? styles.active : ''} // 현재 인덱스에 active 클래스 추가
           />
         ))}
       </div>
 
       {/* 푸터: 내비게이션 버튼들 */}
-      <footer className="landing-footer">
+      <footer className={styles['landing-footer']}>
         {/* NavButton 컴포넌트로 각 버튼 렌더링 */}
         <NavButton label="Coffee Bean" tabIndex={0} onClick={onSelectTab} />
         <NavButton label="Blend" tabIndex={1} onClick={onSelectTab} />

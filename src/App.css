@@ -1,7 +1,7 @@
+/* Global styles */
 
-
-
-
-
-
-
+body.landing-active {
+  background-color: #080808;
+  color: #ffffff;
+  overflow: hidden;
+}
